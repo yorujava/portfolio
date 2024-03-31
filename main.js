@@ -1,21 +1,7 @@
-function writeHeader(){
-	$.ajax({
-		url:"/include/header.html",
-		cache:false,
-		async:false,
-		success:function(html){
-			document.write(html);
-		}
-	});
-}
 
-function writeFooter(){
-	$.ajax({
-		url:"/include/footer.html",
-		cache:false,
-		async:false,
-		success:function(html){
-			document.write(html);
-		}
-	});
-}
+fetch("include/header.html")
+.then((response) => response.text())
+.then((data) => document.querySelector("#header").innerHTML = data);
+fetch("include/footer.html")
+.then((response) => response.text())
+.then((data) => document.querySelector("#footer").innerHTML = data);
