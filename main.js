@@ -1,6 +1,6 @@
 function header(rootDir){
     $.ajax({
-        url: rootDir + "header.html",  // 読み込むHTMLファイル
+        url: rootDir + "include/header.html",  // 読み込むHTMLファイル
         cache: false,
         async: false,
         dataType: 'html',
@@ -13,7 +13,7 @@ function header(rootDir){
 
 function header(rootDir){
     $.ajax({
-        url: rootDir + "header.html",  // 読み込むHTMLファイル
+        url: rootDir + "include/header.html",  // 読み込むHTMLファイル
         cache: false,
         async: false,
         dataType: 'html',
