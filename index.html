@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <script>
-        header();
-    </script>
     
-    <script>
-        footer();
-    </script>
-<script src="main.js"></script>
+
+　　<div id="header"></div>
+
+<main>
+  <p>内容</p>
+</main>
+
+<div id="footer"></div>
+
+<script>
+  $(function() {
+    $("#header").load("include/header.html");
+    $("#footer").load("include/footer.html");
+  });
+</script>
+
 </body>
 </html>
