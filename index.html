@@ -13,6 +13,28 @@
     <script type="text/javascript">
         writeFooter();
     </script>
-    <script src="main.js"></script>
+    <script type="text/javascript">
+        function writeHeader(){
+	$.ajax({
+		url:"/include/header.html",
+		cache:false,
+		async:false,
+		success:function(html){
+			document.write(html);
+		}
+	});
+}
+
+function writeFooter(){
+	$.ajax({
+		url:"/include/footer.html",
+		cache:false,
+		async:false,
+		success:function(html){
+			document.write(html);
+		}
+	});
+}
+    </script>
 </body>
 </html>
