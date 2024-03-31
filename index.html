@@ -1,40 +1,9 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script type="text/javascript">
-        writeHeader();
-    </script>
-    
-    <script type="text/javascript">
-        writeFooter();
-    </script>
-    <script type="text/javascript">
-        function writeHeader(){
-	$.ajax({
-		url:"/include/header.html",
-		cache:false,
-		async:false,
-		success:function(html){
-			document.write(html);
-		}
-	});
-}
-
-function writeFooter(){
-	$.ajax({
-		url:"/include/footer.html",
-		cache:false,
-		async:false,
-		success:function(html){
-			document.write(html);
-		}
-	});
-}
-    </script>
-</body>
-</html>
+<script>header('../');</script>
+<header>
+	<ul>
+		<li><a href="{$root}index.html">TOP</a></li>
+		<li><a href="{$root}about.html">ABOUT</a></li>
+		<li><a href="{$root}service.html">SERVICE</a></li>
+		<li><a href="{$root}contact.html">CONTACT</a></li>
+	</ul>
+</header>
