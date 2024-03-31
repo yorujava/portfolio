@@ -1,22 +1,25 @@
-//共通ヘッダーフッター読み込み
-function writeHeader(){
-	$.ajax({
-		url:"/include/header.html",
-		cache:false,
-		async:false,
-		success:function(html){
-			document.write(html);
-		}
-	});
+function header(rootDir){
+    $.ajax({
+        url: rootDir + "header.html",  // 読み込むHTMLファイル
+        cache: false,
+        async: false,
+        dataType: 'html',
+        success: function(html){
+            html = html.replace(/\{\$root\}/g, rootDir); //header.htmlの{$root}を置換
+            document.write(html);
+        }
+    });
 }
 
-function writeFooter(){
-	$.ajax({
-		url:"/include/footer.html",
-		cache:false,
-		async:false,
-		success:function(html){
-			document.write(html);
-		}
-	});
+function header(rootDir){
+    $.ajax({
+        url: rootDir + "header.html",  // 読み込むHTMLファイル
+        cache: false,
+        async: false,
+        dataType: 'html',
+        success: function(html){
+            html = html.replace(/\{\$root\}/g, rootDir); //header.htmlの{$root}を置換
+            document.write(html);
+        }
+    });
 }
