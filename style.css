@@ -41,7 +41,9 @@ h1{
   font-family: GAU Love Rocket ;
   color:var(--color01-h1);
 }
-
+nav.nowrap{
+  white-space:nowrap;
+}
 nav button{
   margin: 0.3em 0;
   padding: 0.8em;
@@ -49,7 +51,7 @@ nav button{
   font-family: Meiryo UI ;
   border-color: rgba(255, 255, 255, 0.562) ;
   font-weight:bold;
-  font-size: 0.7em;
+  font-size: clamp(15px,2.5vw,25px);
   color: var(--color04-navButton);
 }
 nav button:hover{
