@@ -1,0 +1,73 @@
+:root{
+  --color01-h1:#e24641;
+  --color02-headerBack:#f3c9ba;
+  --color03-bodyBack:#f5e9e9;
+  --color04-navButton:#ac5454;
+  --color05-hamburger:rgb(47, 63, 70);
+  --color06-mainBack:#DDD;
+
+  --defaultFontSize:clamp(23px,3vmax,38px);
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  font-size: var(--defaultFontSize);
+  background-color: var(--color03-bodyBack);
+  font-family: Georgia,游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
+}
+@font-face {
+    font-family: GAU Love Rocket;
+    src: url(material/GAU_Love_Rocket.ttf);
+}
+header{
+  margin: -2em 0 0 0;
+  padding: 1em 0 0 0;
+  position: fixed;
+  width: 100%;
+  background-color: var(--color02-headerBack);
+}
+footer{
+  padding: 0.3em 0 0.7em 0;
+  background-color: var(--color02-headerBack);
+  font-size: 0.8em;
+  text-align: center;
+}
+h1{
+  font-size: 1.2em;
+  margin: 0 0 0 0;
+  padding: 0 1em 0.4em 1em;
+  font-family: GAU Love Rocket ;
+  color:var(--color01-h1);
+}
+
+nav button{
+  margin: 0.3em 0;
+  padding: 0.8em;
+  background-color: transparent;
+  font-family: Meiryo UI ;
+  border-color: rgba(255, 255, 255, 0.562) ;
+  font-weight:bold;
+  font-size: 0.7em;
+  color: var(--color04-navButton);
+}
+nav button:hover{
+  background-color: rgba(255, 255, 255, 0.562);
+}
+.inlineBlockBw{
+  padding: 0 0.4em;
+  display: flex;
+  justify-content: space-between;
+}
+nav hr{
+  border-top: 0.15em solid var(--color05-hamburger);
+  width: 1.2em;
+  margin: 0.2em 0;
+}
+main{
+  margin: 3.7em 0.7em 0.4em 0.7em;
+  padding: 0.5em 0.6em 1.5em 0.6em;
+  min-height: 70vh;
+  background-color: var(--color06-mainBack);
+}
