@@ -1,10 +1,12 @@
 :root{
-  --color01-h1:#e24641;
-  --color02-headerBack:#f3c9ba;
-  --color03-bodyBack:#f5e9e9;
-  --color04-navButton:#ac5454;
-  --color05-hamburger:rgb(47, 63, 70);
-  --color06-mainBack:#DDD;
+  --color01-h1:#ff514b;
+  --color02-headerBack: rgba(15, 15, 15, 0.8) 0%,rgba(27, 28, 29, 0.8) 40%, rgba(98,100,102,0.8) 60%, rgba(10, 10, 10, 0.8) 100%;
+  --color03-bodyBack: linear-gradient(135deg, rgba(98,100,102,1) 0%, rgba(6,59,96,1)100%);
+  --color04-navButton:rgb(219, 244, 255);
+  --color05-hamburger:rgb(167, 205, 221);
+  --color06-mainBack:rgba(220, 220, 230, 0.9);
+  --color07-footerBack:rgba(107, 107, 107, 0.7) ;
+  --color08-footerFont:#ccc;
 
   --defaultFontSize:clamp(23px,3vmax,38px);
   --menuFontSize:clamp(15px,2.5vw,25px);
@@ -15,7 +17,7 @@
 }
 body{
   font-size: var(--defaultFontSize);
-  background-color: var(--color03-bodyBack);
+  background: var(--color03-bodyBack);
   font-family: Georgia,游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
 }
 @font-face {
@@ -27,11 +29,13 @@ body{
   padding: 1em 0 0 0;
   position: fixed;
   width: 100%;
-  background-color: var(--color02-headerBack);
+  background-image: -webkit-linear-gradient(315deg, var(--color02-headerBack));
+  background-image: linear-gradient(135deg, var(--color02-headerBack));
 }
 footer{
   padding: 0.3em 0 0.7em 0;
-  background-color: var(--color02-headerBack);
+  color: var(--color08-footerFont);
+  background-color: var(--color07-footerBack);
   font-size: 0.8em;
   text-align: center;
 }
@@ -73,6 +77,8 @@ nav hr{
   margin: 0.2em 0;
 }
 nav.hamburgerMenu{
+  margin: -1em 0 0 0;
+  padding: 1em 0 0 0;
   display: block;
   position: fixed;
   background-color: #fff;
@@ -86,7 +92,7 @@ nav.hamburgerMenu{
 nav.hamburgerMenu:target{
   right: 0;
 }
-nav.hamburgerMenu::before{
+nav.hamburgerMenu a.menuClose{
   right: -100%;
   top: 0;
   width: 100%;
@@ -95,10 +101,9 @@ nav.hamburgerMenu::before{
   background-color: rgba(0, 0, 0, 0.7);
   content: "";
   cursor: default;
-  z-index: -1;
   transition: all 0.3s;
 }
-nav.hamburgerMenu:target::before{
+nav.hamburgerMenu:target a.menuClose{
   right: 10em;
 }
 nav .inner{
