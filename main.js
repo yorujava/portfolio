@@ -12,7 +12,11 @@ $(function(){
       var new_Y = $(window).scrollTop();
       var d = old_Y - new_Y;
       old_Y = new_Y;
+      var y = window.scrollY;
       if ( d > 0 ) {
+        /* to Top */
+        $('.header').slideDown();
+      } else if ( y < 100) {
         /* to Top */
         $('.header').slideDown();
       } else {
