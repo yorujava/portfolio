@@ -1,3 +1,4 @@
+/* css変数を自動適応でなく明示的に使用 */
 :root{
   --color01-h1:#ff514b;
   --color02-headerBack: rgba(15, 15, 15, 0.8) 0%,rgba(27, 28, 29, 0.8) 40%, rgba(98,100,102,0.8) 60%, rgba(10, 10, 10, 0.8) 100%;
@@ -10,25 +11,30 @@
   --color09-secBlock:rgba(255, 255, 255, 0.9);
   --color10-none:rgba(255, 255, 255, 0.014);
   --color11-normal:#000;
+  --color12-maker:rgba(255, 180, 199, 0.7) ;
 
   --boxShadow01: 0.1em 0.6em 1.3em 0 rgba(0, 0, 0, .5);
 
   --defaultFontSize:clamp(16px,3vmax,32px);
   --menuFontSize:clamp(19px,2.5vw,25px);
 }
+/* 余白をリセット */
 *{
   margin: 0;
   padding: 0;
 }
+/* 標準の文字と背景色を設定 */
 body{
   font-size: var(--defaultFontSize);
   background: var(--color03-bodyBack);
   font-family: Georgia,游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
 }
+/* タイトルのフォントをファイルに用意 */
 @font-face {
     font-family: GAU Love Rocket;
     src: url(material/GAU_Love_Rocket.ttf);
 }
+/* ヘッダーフッターの設定 */
 #header{
   top:0;
   padding: 1em 0 0 0;
@@ -87,6 +93,76 @@ nav hr{
   width: 1.2em;
   margin: 0.2em 0;
 }
+/* メインのスタイル */
+main{
+  margin: 6.2em 0.3em 0.3em 0.3em;
+  padding: 0.1em 0.1em 1em 0.1em;
+  min-height: 65vh;
+  background-color: var(--color06-mainBack);
+}
+main p{
+  margin: 0.5em;
+}
+/* メインの中のブロックの種類 */
+.privacyPolicy, .home{
+  max-width: 1400px;
+  margin: 1.5em;
+  font-size: 0.8em;
+  padding: 1.2em;
+  background-color: var(--color09-secBlock);
+  border-radius: 2em ;
+  box-shadow: var(--boxShadow01);
+}
+.home h3{
+  border-left: solid 1em #ffffff;
+  line-height: 1;
+  padding: 0.1em 0 0 1em;
+  border-bottom: solid 0.4em #c1ccd3;
+}
+.maker{
+  background-color: var(--color12-maker);
+}
+.privacyPolicy h3{
+  font-size: 1.2em;
+  margin: 2em 0 0 0;
+}
+/* フェードインのための記述 */
+.fadeIn{
+  color: var(--color10-none);
+  opacity: 0;
+  position: relative;
+  top: 30em;
+}
+.fadeIn:nth-child(1){
+  transition: 0.5s;
+}
+.fadeIn:nth-child(2){
+  transition: 0.8s;
+}
+.fadeIn:nth-child(3){
+  transition: 1.05s;
+}
+.fadeIn:nth-child(4){
+  transition: 1.25s;
+}
+.fadeIn:nth-child(5){
+  transition: 1.4s;
+}
+.fadeIn:nth-child(6){
+  transition: 1.55s;
+}
+.fadeIn:nth-child(7){
+  transition: 1.65s;
+}
+.fadeIn:nth-last-child(-n+8){
+  transition: 1.7s;
+}
+.active {
+  opacity: 1;
+  top: 0;
+  color: var(--color11-normal);
+}
+/* ハンバーガーメニューはCSSのみで動作 */
 nav.hamburgerMenu{
   margin: -1em 0 0 0;
   padding: 1em 0 0 0;
@@ -151,62 +227,4 @@ nav .inner p a.menu{
 }
 nav .inner p a.menu:hover{
   background-color: #e4e4e4;
-}
-main{
-  margin: 6.2em 0.3em 0.3em 0.3em;
-  padding: 0.1em 0.1em 1em 0.1em;
-  min-height: 70vh;
-  background-color: var(--color06-mainBack);
-}
-main p{
-  margin: 0.5em;
-}
-
-.privacyPolicy{
-  max-width: 1400px;
-  margin: 1.5em;
-  font-size: 0.8em;
-  padding: 1.2em;
-  background-color: var(--color09-secBlock);
-  border-radius: 2em ;
-  box-shadow: var(--boxShadow01);
-}
-.privacyPolicy h3{
-  font-size: 1.2em;
-  margin: 2em 0 0 0;
-}
-.fadeIn{
-  color: var(--color10-none);
-  opacity: 0;
-  position: relative;
-  top: 30em;
-}
-.fadeIn:nth-child(1){
-  transition: 0.5s;
-}
-.fadeIn:nth-child(2){
-  transition: 0.8s;
-}
-.fadeIn:nth-child(3){
-  transition: 1.05s;
-}
-.fadeIn:nth-child(4){
-  transition: 1.25s;
-}
-.fadeIn:nth-child(5){
-  transition: 1.4s;
-}
-.fadeIn:nth-child(6){
-  transition: 1.55s;
-}
-.fadeIn:nth-child(7){
-  transition: 1.65s;
-}
-.fadeIn:nth-last-child(-n+8){
-  transition: 1.7s;
-}
-.active {
-  opacity: 1;
-  top: 0;
-  color: var(--color11-normal);
 }
