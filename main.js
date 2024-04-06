@@ -16,7 +16,7 @@ $(function(){
       if ( d > 0 ) {
         /* to Top */
         $('.header').slideDown();
-      } else if ( y < 100) {
+      } else if ( y < 75) {
         /* to Top */
         $('.header').slideDown();
       } else {
