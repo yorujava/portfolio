@@ -113,15 +113,32 @@ main p{
   border-radius: 2em ;
   box-shadow: var(--boxShadow01);
 }
-.home h3, .login h3{
+.home h3{
   border-left: solid 1em #ffffff;
   line-height: 1;
   padding: 0.1em 0 0 1em;
   border-bottom: solid 0.4em #c1ccd3;
 }
 .login{
-  max-width: 25em;
-  margin: 0 auto;
+  max-width: 15em;
+  margin: 1.5em auto;
+  
+}
+h2.login{
+  text-align: center;
+}
+.login input{
+  font-size: 1em;
+}
+article.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login button{
+  font-size: 0.9em;
+  font-family: Meiryo UI ;
+  padding: 0.2em 4.5em;
 }
 .maker{
   background-color: var(--color12-maker);

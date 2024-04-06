@@ -13,9 +13,8 @@
 
 <main>
     <section class="fadeIn">
-        <h2 class="login"></h2>
+        <h2 class="login">新規登録</h2>
         <article class="login">
-            <h3 class="login"></h3>
             <p></p>
         </article>
     </section>
