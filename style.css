@@ -39,7 +39,7 @@ footer{
   font-size: 0.5em;
   text-align: center;
 }
-footer a{
+a.footer{
   color: var(--color08-footerFont);
   text-decoration: none;
   font-size: 1.3em;
