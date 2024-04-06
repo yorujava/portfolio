@@ -32,7 +32,7 @@ $(function(){
   var windowHeight = $(window).height();       /* ウィンドウの高さを測定 */
   $('.fadeIn').each(function(){                /* 「fadeIn」のクラスがついているものを1つずつ確認し・・・ */
     var cntPos = $(this).offset().top;         /* 対象の要素の上からの距離を測定 */
-    if(scroll > cntPos - windowHeight + windowHeight / 5){  /* 要素がある位置までスクロールされていたら */
+    if(scroll +windowHeight/2> cntPos - windowHeight - windowHeight/5*3 ){  /* 要素がある位置までスクロールされていたら */
       $(this).addClass('active');              /* 「active」のクラスを付与 */
     }
   });
