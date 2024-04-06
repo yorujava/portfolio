@@ -1,8 +1,8 @@
 
-fetch("include/header.html")
+fetch("https://yorujava.github.io/portfolio/include/header.html")
 .then((response) => response.text())
 .then((data) => document.querySelector("#header").innerHTML = data);
-fetch("include/footer.html")
+fetch("https://yorujava.github.io/portfolio/include/footer.html")
 .then((response) => response.text())
 .then((data) => document.querySelector("#footer").innerHTML = data);
 $(function(){
