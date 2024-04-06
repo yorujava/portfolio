@@ -6,7 +6,6 @@ fetch("https://yorujava.github.io/portfolio/include/footer.html")
 .then((response) => response.text())
 .then((data) => document.querySelector("#footer").innerHTML = data);
 $(function(){
- 
     var old_Y = 0;
     $(window).on('scroll', function (){
       var new_Y = $(window).scrollTop();
