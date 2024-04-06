@@ -13,9 +13,9 @@
 
 <main>
     <section class="fadeIn">
-        <h2 class=""></h2>
-        <article class="">
-            <h3 class=""></h3>
+        <h2 class="login"></h2>
+        <article class="login">
+            <h3 class="login"></h3>
             <p></p>
         </article>
     </section>
