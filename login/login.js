@@ -36,7 +36,6 @@ $(window).on('load', function(){
         loginMsg.appendChild(spanMsg);
     }
     if(window.sessionStorage.getItem(['dspID'])=='ゲスト'){
-        const p0=document.createElement('p');
         const p1=document.createElement('p');
         const p2=document.createElement('p');
         const p3=document.createElement('p');
@@ -47,7 +46,6 @@ $(window).on('load', function(){
         const inputPass=document.createElement('input');
         const button=document.createElement('button');
     
-        span0.textContent='タブを閉じるまで有効なIDを作成します。表示名としてのみ利用されます。日本語も可能です。';
         spanId.textContent='セッションID：';
         inputId.type='text';
         inputId.id='login-id';
@@ -58,8 +56,6 @@ $(window).on('load', function(){
         inputPass.classList.add("login-pass");
         button.textContent='ログイン';
     
-        p0.appendChild(span0);
-        login.appendChild(p0);
         p1.appendChild(spanId);
         login.appendChild(p1);
         login.appendChild(inputId);
