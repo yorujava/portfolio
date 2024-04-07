@@ -36,20 +36,3 @@ $(function(){
     }
   });
 });
-
-document.addEventListener('DOMContentLoaded',()=>{
-  const guestId='ゲスト';
-  const guestPass='1234';
-  window.sessionStorage.setItem([guestId],[guestPass]);
-  window.sessionStorage.setItem(['dspID'],[guestId]);
-  console.log("testですよ");
-}, {
-  'once': true // 1度だけのイベントリスナーにするオプション
-});
-const dspID=document.getElementById('login-dsp');
-window.onload = function(){
-  
-  const spanId=document.createElement('span');
-  spanId.textContent=window.sessionStorage.getItem(['dspID'])+' さん';
-  dspID.appendChild(span);
-  }
