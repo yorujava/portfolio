@@ -12,11 +12,23 @@
 <div id="header"></div>
 
 <main>
-    <section class="fadeIn">
-        <h2 class="login">新規登録</h2>
+    <section>
+        <h2 class="login">セッションID登録</h2>
         <article class="login">
-            <p></p>
+            <p id="login-msg">
+                <form id="log-in">
+                <!-- <span class="hd">セッションID：</span><br>
+                <input class="hd" type="text" id="login-id"><br>
+                <span class="hd">パスワード：</span><br>
+                <input class="hd" type="password" id="login-pass"><br>
+                <br>
+                <button>ログイン</button><br> -->
+                </form>
+                <br><br><br>
+                <button onclick="location.href='https://yorujava.github.io/portfolio/'">Homeへ戻る</button>
+            </p>
         </article>
+        
     </section>
 </main>
 
@@ -24,7 +36,7 @@
 
 <script src="../main.js">
 </script>
-<script src="login.js">
+<script src="getID.js">
 </script>
 
 </body>
