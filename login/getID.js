@@ -7,7 +7,7 @@ const logout=document.getElementById('log-out');
 const login=document.getElementById('log-in');
 const loginMsg=document.getElementById('login-msg');
 window.sessionStorage.setItem(['loginMsg'],['ようこそ']);
-const hid=document.getElementById('hd');
+const hid=document.getElementsByClassName('hd');
 var msg='';
 
 login.addEventListener("submit",function(){
@@ -38,36 +38,13 @@ $(window).on('load', function(){
         spanMsg.textContent='ログインしています';
         loginMsg.appendChild(spanMsg);
     }
-    if(window.sessionStorage.getItem(['dspID'])=='ゲスト'){
-        const p0=document.createElement('p');
-        const p1=document.createElement('p');
-        const p2=document.createElement('p');
-        const p3=document.createElement('p');
-        const span0=document.createElement('span');
-        const spanId=document.createElement('span');
-        const inputId=document.createElement('input');
-        const spanPass=document.createElement('span');
-        const inputPass=document.createElement('input');
-        const button=document.createElement('button');
-
-        span0.textContent='タブを閉じるまで有効なIDを作成します。表示名としてのみ利用されます。日本語も可能です。';
-        spanId.textContent='セッションID：';
-        inputId.type='text';
-        spanPass.textContent='パスワード：';
-        inputPass.type='password';
-        button.textContent='ログイン';
-
-        p0.appendChild(span0);
-        loginMsg.appendChild(p0);
-        p1.appendChild(spanId);
-        loginMsg.appendChild(p1);
-        loginMsg.appendChild(inputId);
-        p2.appendChild(spanPass);
-        loginMsg.appendChild(p2);
-        loginMsg.appendChild(inputPass);
-        p3.appendChild(button);
-        loginMsg.appendChild(p3);
-
-    }
-  })
+    if(window.sessionStorage.getItem(['dspID'])!='ゲスト'){
+      console.log('判定しています')
+      hid,this.style="display: none;";
+  
+  }
+    
+  });
+  
+  
   
