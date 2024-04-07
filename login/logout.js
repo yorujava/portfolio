@@ -38,10 +38,5 @@ $(window).on('load', function(){
         login.appendChild(p3);
 
     }
-//     if(window.sessionStorage.getItem(['dspID'])!='ゲスト'){
-//       console.log('判定しています')
-//       hid.style="display: none;";
-  
-//   }
   });
   
