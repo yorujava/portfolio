@@ -1,6 +1,6 @@
 "use strict";
 
-
+const login=document.getElementById('log-in');
 const loginMsg=document.getElementById('login-msg');
 window.sessionStorage.setItem(['loginMsg'],['ようこそ']);
 const hid=document.getElementById('hd');
