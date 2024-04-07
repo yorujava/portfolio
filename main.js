@@ -51,9 +51,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 $(window).on('load', function(){
   const dspId=document.getElementById('login-dsp2');
+  const idName=document.getElementById('idName');
   const span=document.createElement('span');
   var getID='ID：'+window.sessionStorage.getItem(['dspID'])+' さん';
   span.textContent=getID;
   dspId.appendChild(span);
-  console.log(getID);
+  if(idName!=null){
+  idName.appendChild(span);
+  }
 })
