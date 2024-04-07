@@ -1,8 +1,5 @@
 "use strict";
 
-const getId=document.getElementById('get-id');
-const logout=document.getElementById('log-out');
-const login=document.getElementById('log-in');
 const loginMsg=document.getElementById('login-msg');
 window.sessionStorage.setItem(['loginMsg'],['ようこそ']);
 const hid=document.getElementById('hd');
@@ -15,7 +12,6 @@ login.addEventListener("submit",function(){
     const pass=passInput.value;
     if(window.sessionStorage.getItem([id])==pass){
     window.sessionStorage.setItem([id],[pass]);
-    hid,this.style="display:none";
     msg='ログインしました';
     window.sessionStorage.setItem(['loginMessage'],[msg]);
     const span=document.createElement('span');
