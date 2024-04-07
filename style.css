@@ -17,6 +17,7 @@
 
   --defaultFontSize:clamp(16px,3vmax,32px);
   --menuFontSize:clamp(19px,2.5vw,25px);
+  --urlFontSize:clamp(11px,1.3vmax,16px);
 }
 /* 余白をリセット */
 *{
@@ -59,7 +60,7 @@ a.footer{
 h1{
   font-size: 1em;
   margin: 0 0 0 0;
-  padding: 0 0.3em 0.4em 1em;
+  padding: 0 0.3em 0.2em 1em;
   font-family: GAU Love Rocket ;
 }
 h1 a{
@@ -114,10 +115,29 @@ main p{
   box-shadow: var(--boxShadow01);
 }
 .home h3{
-  border-left: solid 1em #ffffff;
-  line-height: 1;
-  padding: 0.1em 0 0 1em;
+  border-left: solid 1em #68404000;
+  line-height: 0.9em;
+  padding: 0.1em 0 0 0.35em;
   border-bottom: solid 0.4em #c1ccd3;
+}
+.home p{
+  margin-top: 1em;
+}
+p.url{
+  margin-top: 0.3em;
+  margin-bottom: 1.7em;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 0.8em;
+}
+a.url{
+  line-height:0;
+  font-size: var(--urlFontSize);
+}
+a.url::before{
+  font-size: 2em;
+  line-height:0;
+  content: '＞リンク';
 }
 .login{
   max-width: 15em;
@@ -155,28 +175,28 @@ article.login{
   top: 30em;
 }
 .fadeIn:nth-child(1){
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .fadeIn:nth-child(2){
-  transition: 0.8s;
+  transition: 0.5s;
 }
 .fadeIn:nth-child(3){
-  transition: 1.05s;
+  transition: 0.7s;
 }
 .fadeIn:nth-child(4){
-  transition: 1.25s;
+  transition: 0.8s;
 }
 .fadeIn:nth-child(5){
-  transition: 1.4s;
+  transition: 0.9s;
 }
 .fadeIn:nth-child(6){
-  transition: 1.55s;
+  transition: 1.0s;
 }
 .fadeIn:nth-child(7){
-  transition: 1.65s;
+  transition: 1.05s;
 }
 .fadeIn:nth-last-child(-n+8){
-  transition: 1.7s;
+  transition: 1.1s;
 }
 .active {
   opacity: 1;
@@ -210,7 +230,7 @@ nav.hamburgerMenu a.menuClose{
   transition: all 0.3s;
 }
 nav.hamburgerMenu:target a.menuClose{
-  right: 10em;
+  right: 10.74em;
 }
 nav .inner{
   padding: 1.5em;
