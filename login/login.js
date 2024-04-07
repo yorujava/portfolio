@@ -64,5 +64,10 @@ $(window).on('load', function(){
         loginMsg.appendChild(p3);
 
     }
-  })
+    if(window.sessionStorage.getItem(['dspID'])!='ゲスト'){
+      console.log('判定しています')
+      hid.style="display: none;";
+  
+  }
+  });
   
