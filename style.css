@@ -67,10 +67,16 @@ h1 a{
   color:var(--color01-h1);
   text-decoration: none;
 }
-p#login-dsp{
-  position: absolute;
+p#login-dsp2{
+  position: fixed;
   color: #fff;
-  font-size: 2em;
+  font-size: 0.5em;
+  height: 0.5em;
+  width: auto;
+  margin: 0;
+  z-index: 5;
+  top:0.15em;
+  right: 1.5em;
 }
 nav.nowrap{
   white-space:nowrap;

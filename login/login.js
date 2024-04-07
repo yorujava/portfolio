@@ -22,4 +22,5 @@ login.addEventListener("submit",function(){
     const span=document.createElement('span');
     span.textContent=msg;
     loginMsg.appendChild(span);
+    window.sessionStorage.setItem(['dspID'],[id]);
 });
