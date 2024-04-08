@@ -13,7 +13,11 @@ login.addEventListener("submit",function(){
     const pass=passInput.value;
     if(window.sessionStorage.getItem([id])==pass){
     window.sessionStorage.setItem([id],[pass]);
-    msg='ログインしました';
+    if(id=='ゲスト'){
+        msg='【「ゲスト」はログアウト用の予約IDです】';
+    }else{
+        msg='ログインしました';
+    }
     window.sessionStorage.setItem(['loginMessage'],[msg]);
     const span=document.createElement('span');
     span.textContent=msg;
