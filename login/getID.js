@@ -9,9 +9,14 @@ var msg='';
 login.addEventListener("submit",function(){
     const idInput=document.getElementById('login-id');
     const passInput=document.getElementById('login-pass');
-    const id=idInput.value;
+    const id=idInput.value.trim();
     const pass=passInput.value;
     console.log('入力されているのは'+id+pass);
+    if(id===''||pass===''){
+        msg='【エラー！IDかPASSが未入力か空白です】';
+        window.sessionStorage.setItem(['loginMessage'],[msg]);
+        return;
+    }
     if(window.sessionStorage.getItem([id])==null){
     window.sessionStorage.setItem([id],[pass]);
     msg='ログインしました';
@@ -21,7 +26,7 @@ login.addEventListener("submit",function(){
     loginMsg.appendChild(span);
     window.sessionStorage.setItem(['dspID'],[id]);
     }else{
-        msg='そのIDは使われています';
+        msg='【そのIDは使われています】';
         window.sessionStorage.setItem(['loginMessage'],[msg]);
     }
 });
@@ -48,14 +53,20 @@ $(window).on('load', function(){
         const inputPass=document.createElement('input');
         const button=document.createElement('button');
     
-        span0.textContent='タブを閉じるまで有効なIDを作成します。表示名としてのみ利用されます。日本語も可能です。';
+        span0.textContent='ワンセッションのユーザー名とPASSを設定。（タブを閉じるまで有効な表示名の設定です。）';
         spanId.textContent='セッションID：';
         inputId.type='text';
         inputId.id='login-id';
+        inputId.placeholder='名前（1～20文字）';
+        inputId.pattern='.{1,20}';
+        inputId.title='1～20文字で設定してください';
         inputId.classList.add("login-id");
         spanPass.textContent='パスワード：';
         inputPass.type='password';
         inputPass.id='login-pass';
+        inputPass.placeholder='半角英数字記号3～60文字';
+        inputPass.pattern='[!-~]{3,60}';
+        inputPass.title='半角英数字記号3～60文字で設定してください';
         inputPass.classList.add("login-pass");
         button.textContent='ゲットID';
     
