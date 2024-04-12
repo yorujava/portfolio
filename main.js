@@ -53,10 +53,12 @@ $(window).on('load', function(){
   const dspId=document.getElementById('login-dsp2');
   const idName=document.getElementById('idName');
   const span=document.createElement('span');
+  const span2=document.createElement('span');
   var getID='ID：'+window.sessionStorage.getItem(['dspID'])+' さん';
   span.textContent=getID;
+  span2.textContent=getID;
   dspId.appendChild(span);
   if(idName!=null){
-  idName.appendChild(span);
+  idName.appendChild(span2);
   }
 })
