@@ -28,7 +28,7 @@
 body{
   font-size: var(--defaultFontSize);
   background: var(--color03-bodyBack);
-  font-family: Georgia,游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
+  font-family: YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
 }
 /* タイトルのフォントをファイルに用意 */
 @font-face {
