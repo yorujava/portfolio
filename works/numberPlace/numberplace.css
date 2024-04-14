@@ -34,6 +34,9 @@ table.inside th{
     align-items: center;
     line-height:0;
 }
+table.inside th:hover{
+    background-color: bisque;
+}
 .iptN{
     font-size: 1em;
     padding: 0 0.07em;
@@ -43,13 +46,19 @@ table.inside th{
     color: #fff;
 }
 .iptN:hover{
-    background-color: rgb(248, 184, 232);
+    background-color: rgb(255, 116, 116);
     color: darkblue;
 }
 #run,#numpreMsg{
     text-align: center;
 }
 .numMk{
-    background-color: rgb(248, 184, 232);
+    background-color: rgb(255, 116, 116);
     color: darkblue;
+}
+b.iptN{
+    background-color: rgb(240, 239, 182);
+    color: rgb(228, 0, 0);
+    text-shadow: 2px 1px rgb(129, 129, 77);
+    border: none;
 }

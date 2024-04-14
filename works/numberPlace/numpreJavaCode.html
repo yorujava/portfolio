@@ -459,7 +459,7 @@
                     for (int x = 0; x &lt; 9; x++) {// 行探索
                         countH = 0;
                         for (int y = 0; y &lt; 9; y++) {
-                            if (gameBordsB[y][x] % tuwins[kk] == 0) {
+                            if (gameBordsB[y][x] % tuinXs[kk] == 0||gameBordsB[y][x] % tuinYs[kk] == 0) {
                                 countH++;
                                 if (countH == 1) {
                                     basyo2 = y;
@@ -484,7 +484,7 @@
                     for (int x = 0; x &lt; 9; x++) {// 列探索
                         countH = 0;
                         for (int y = 0; y &lt; 9; y++) {
-                            if (gameBordsB[x][y] % tuwins[kk] == 0) {
+                            if (gameBordsB[x][y] % tuinXs[kk] == 0||gameBordsB[x][y] % tuinYs[kk] == 0) {
                                 countH++;
                                 if (countH == 1) {
                                     basyo2 = y;
@@ -517,7 +517,7 @@
                             x = (xx / 3) * 3 + yy / 3;
                             y = (xx % 3) * 3 + yy % 3;
     
-                            if (gameBordsB[x][y] % tuwins[kk] == 0) {
+                            if (gameBordsB[x][y] % tuinXs[kk] == 0||gameBordsB[x][y] % tuinYs[kk] == 0) {
                                 countH++;
                                 if (countH == 1) {
                                     basyoX2 = x;
