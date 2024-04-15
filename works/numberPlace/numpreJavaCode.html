@@ -468,13 +468,14 @@
                                 }
                             }
                         }
+			if(gameBordsB[basyo][x] !=tuinXs[kk] &&gameBordsB[basyo][x] != tuinYs[kk]&&gameBordsB[basyo2][x] != tuinXs[kk] &&gameBordsB[basyo2][x] != tuinYs[kk]){
                         if (countH == 2 &amp;&amp; kakuD[basyo][x] != 0 &amp;&amp; kakuD[basyo2][x] != 0) {
                             kakuD[basyo][x] = 0;
                             gameBordsB[basyo][x] = tuwins[kk];
                             kakuD[basyo2][x] = 0;
                             gameBordsB[basyo2][x] = tuwins[kk];
                         }
-    
+                        }
                     }
                 }
                 for (int kk = 0; kk &lt;= 35; kk++) {// 列一探索するナンバー
@@ -493,13 +494,14 @@
                                 }
                             }
                         }
+			if(gameBordsB[x][basyo] !=tuinXs[kk] &&gameBordsB[x][basyo] != tuinYs[kk]&&gameBordsB[x][basyo2] != tuinXs[kk] &&gameBordsB[x][basyo2] != tuinYs[kk]){
                         if (countH == 2 &amp;&amp; kakuD[x][basyo] != 0 &amp;&amp; kakuD[x][basyo2] != 0) {
                             kakuD[x][basyo] = 0;
                             gameBordsB[x][basyo] = tuwins[kk];
                             kakuD[x][basyo2] = 0;
                             gameBordsB[x][basyo2] = tuwins[kk];
                         }
-    
+                        }
                     }
                 }
                 for (int kk = 0; kk &lt;= 35; kk++) {// 枠一探索するナンバー
@@ -529,11 +531,13 @@
                             }
     
                         }
+			if(gameBordsB[basyoX][basyoY] !=tuinXs[kk] &&gameBordsB[basyoX][basyoY] != tuinYs[kk]&&gameBordsB[basyoX2][basyoY2] != tuinXs[kk] &&gameBordsB[basyoX2][basyoY2] != tuinYs[kk]){
                         if (countH == 2 &amp;&amp; kakuD[basyoX][basyoY] != 0 &amp;&amp; kakuD[basyoX2][basyoY2] != 0) {
                             kakuD[basyoX][basyoY] = 0;
                             gameBordsB[basyoX][basyoY] = tuwins[kk];
                             kakuD[basyoX2][basyoY2] = 0;
                             gameBordsB[basyoX2][basyoY2] = tuwins[kk];
+                        }
                         }
                     }
                 }

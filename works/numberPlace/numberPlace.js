@@ -8,6 +8,7 @@ function copy() {
     document.execCommand("copy");
 }
 var isRun=false;
+var isClear=false;
 var inputNumber=1;
 var isFast=true;
 const numpreMsg=document.getElementById('numpreMsg');
@@ -92,7 +93,7 @@ function inpNum(e){//数字選択ボタンクリック時処理
     inputNumber=e;//数字を選択したとき
 }}
   function input(e){//マス目をクリックして書き入れる
-    if(!isRun){
+    if(!isRun&&!isClear){
         if(e!=0){
     const ipt=document.getElementById(e);
     const th = document.querySelector('th');
@@ -144,13 +145,13 @@ function inpNum(e){//数字選択ボタンクリック時処理
     [0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0]];//ランダム試行突入時のセーブ＆ロード用
     var priNum=[223092870, 2, 3, 5, 7, 11, 13, 17, 19, 23];//数字候補を素数にして乗算させる対応リスト
-    var tuwins = [ 6, 10, 14, 22, 26, 34, 38, 46, 15, 21, 33, 39, 51, 57, 69, 35, 55, 65, 85, 95, 115, 77,91, 119, 133, 161, 143, 187, 209, 253, 221, 247, 299, 323, 391, 437 ];//ダブル候補リスト
-    var tuinXs = [ 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7, 11, 11,11, 11, 13, 13, 13, 17, 17, 19 ];//ダブル候補処理用
-    var tuinYs = [ 3, 5, 7, 11, 13, 17, 19, 23, 5, 7, 11, 13, 17, 19, 23, 7, 11, 13, 17, 19, 23, 11, 13,17, 19, 23, 13, 17, 19, 23, 17, 19, 23, 19, 23, 23 ];//ダブル候補処理用
+    var tuwins = [ 6, 10, 14, 22, 26, 34, 38, 46, 15, 21, 33, 39, 51, 57, 69, 35, 55, 65, 85, 95, 115, 77, 91, 119, 133, 161, 143, 187, 209, 253, 221, 247, 299, 323, 391, 437 ];//ダブル候補リスト
+    var tuinXs = [ 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7, 11, 11, 11, 11, 13, 13, 13, 17, 17, 19 ];//ダブル候補処理用
+    var tuinYs = [ 3, 5, 7, 11, 13, 17, 19, 23, 5, 7, 11, 13, 17, 19, 23, 7, 11, 13, 17, 19, 23, 11, 13, 17, 19, 23, 13, 17, 19, 23, 17, 19, 23, 19, 23, 23 ];//ダブル候補処理用
 
-    var tuwins2 = [ 6, 10, 14, 22, 26, 34, 38, 15, 21, 33, 39, 51, 57, 35, 55, 65, 85, 95, 77, 91, 119,133, 143, 187, 209, 221, 247, 323 ];//トリプル候補処理用
-    var tuinXs2 = [ 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 7, 7, 7, 7, 11, 11, 11, 13, 13,17 ];//トリプル候補処理用
-    var tuinYs2 = [ 3, 5, 7, 11, 13, 17, 19, 5, 7, 11, 13, 17, 19, 7, 11, 13, 17, 19, 11, 13, 17, 19, 13,17, 19, 17, 19, 19 ];//トリプル候補処理用
+    var tuwins2 = [ 6, 10, 14, 22, 26, 34, 38, 15, 21, 33, 39, 51, 57, 35, 55, 65, 85, 95, 77, 91, 119, 133, 143, 187, 209, 221, 247, 323 ];//トリプル候補処理用
+    var tuinXs2 = [ 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 7, 7, 7, 7, 11, 11, 11, 13, 13, 17 ];//トリプル候補処理用
+    var tuinYs2 = [ 3, 5, 7, 11, 13, 17, 19, 5, 7, 11, 13, 17, 19, 7, 11, 13, 17, 19, 11, 13, 17, 19, 13, 17, 19, 17, 19, 19 ];//トリプル候補処理用
 
     var bfNum=0;//通過前の確定数
     var afNum=0;//通過後の確定数
@@ -181,8 +182,6 @@ function inpNum(e){//数字選択ボタンクリック時処理
             }
         }
       }
-      isRand=false;
-      isRanLoop=false;
       solveTheProblem();//メイン解答ロジックへ
   }
   function checkError(){//不整合チェック
@@ -262,6 +261,7 @@ function inpNum(e){//数字選択ボタンクリック時処理
 
   }
 function checkReturn(){//クリア＆エラー処理ブーリアン返し
+    afNum=0;
     for(let i=0;i<9;i++){//進展の調査タイプ1
         for(let j=0;j<9;j++){
             if(bords[i+1][j+1]==2||bords[i+1][j+1]==3||bords[i+1][j+1]==5||bords[i+1][j+1]==7||bords[i+1][j+1]==11||bords[i+1][j+1]==13||bords[i+1][j+1]==17||bords[i+1][j+1]==19||bords[i+1][j+1]==23){
@@ -269,24 +269,22 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
             }
         }
     }
-    isError=false;
     checkError();
     if(isError&&!isRand){
+        for(let i=1;i<=9;i++){
+            for(let j=1;j<=9;j++){
+                finalBords[i][j]=0;
+            }
+        }
       isRun=false;
       isError=false;
       const b=document.createElement('b');
       const br=document.createElement('br');
       b.classList.add("iptN");
       br.classList.add("iptN");
-      dispBord()
       b.textContent='問題作成に間違いがあります。要修正！';
       numpreMsg.appendChild(b);
       numpreMsg.appendChild(br);
-      for(let i=1;i<=9;i++){
-          for(let j=1;j<=9;j++){
-              finalBords[i][j]=0;
-          }
-      }
       retry();
       return true;
     }else if(isError&&isRand){
@@ -305,8 +303,12 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
         b.classList.add("iptN");
         br.classList.add("iptN");
         b.textContent='解答を表示しました';
-        numpreMsg.appendChild(b);
         numpreMsg.appendChild(br);
+        numpreMsg.appendChild(b);
+        isClear=true;
+        isRun=false;
+        isRand=false;
+        isRanLoop=false;  
         return true;
     }
     return false;
@@ -519,14 +521,17 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                     }
                 }
                 if(countA==2&&finalBordsD[pointA1+1][i+1]==0&&finalBordsD[pointA2+1][i+1]==0){
+                    if(bords[pointA1+1][i+1]!=tuinXs[k]&&bords[pointA1+1][i+1]!=tuinYs[k]&&bords[pointA2+1][i+1]!=tuinXs[k]&&bords[pointA2+1][i+1]!=tuinYs[k]){
                     if(!isRand){
                         finalBordsD[pointA1+1][i+1]=1;
                         finalBordsD[pointA2+1][i+1]=1;
                     }
                     bords[pointA1+1][i+1]=tuwins[k];
                     bords[pointA2+1][i+1]=tuwins[k];
+                    }
                 }
                 if(countB==2&&finalBordsD[i+1][pointB1+1]==0&&finalBordsD[i+1][pointB2+1]==0){
+                    if(bords[i+1][pointB1+1]!=tuinXs[k]&&bords[i+1][pointB1+1]!=tuinYs[k]&&bords[i+1][pointB2+1]!=tuinXs[k]&&bords[i+1][pointB2+1]!=tuinYs[k]){
                     if(!isRand){
                         finalBordsD[i+1][pointB1+1]=1;
                         finalBordsD[i+1][pointB2+1]=1;
@@ -534,7 +539,9 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                     bords[i+1][pointB1+1]=tuwins[k];
                     bords[i+1][pointB2+1]=tuwins[k];
                 }
+                }
                 if(countC==2&&finalBordsD[pointCx1+1][pointCy1+1]==0&&finalBordsD[pointCx2+1][pointCy2+1]==0){
+                    if(bords[pointCx1+1][pointCy1+1]!=tuinXs[k]&&bords[pointCx1+1][pointCy1+1]!=tuinYs[k]&&bords[pointCx2+1][pointCy2+1]!=tuinXs[k]&&bords[pointCx2+1][pointCy2+1]!=tuinYs[k]){
                     if(!isRand){
                         finalBordsD[pointCx1+1][pointCy1+1]=1;
                         finalBordsD[pointCx2+1][pointCy2+1]=1;
@@ -542,70 +549,6 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                     bords[pointCx1+1][pointCy1+1]=tuwins[k];
                     bords[pointCx2+1][pointCy2+1]=tuwins[k];
                 }
-            }
-        }
-        for(let k=0;k<36;k++){//候補が二つに関する処理
-            for(let i=0;i<9;i++){
-                let countA=0;
-                let countB=0;
-                let countC=0;
-                let copyJ=0;
-                for(let j=0;j<9;j++){
-                    copyJ=j;
-                    if(bords[i+1][j+1]==tuwins[k]){
-                        countA++;
-                    }
-                    if(bords[j+1][i+1]==tuwins[k]){
-                        countB++;
-                    }
-                    let i4=(i/3|0)*3;
-                    let i3=(j/3|0);
-                    let j4=(i%3)*3;
-                    let j3=(j%3);
-                    let i2=i4+i3;
-                    let j2=j4+j3;
-                    if(bords[i2+1][j2+1]==tuwins[k]){
-                        countC++;
-                    }
-                }
-                if(countA>=2){
-                    for(let j=0;j<9;j++){
-                        let xy=bords[i+1][j+1];
-                        if(xy!=tuwins[k]&&xy%tuinXs[k]==0&&xy!=tuinXs[k]){
-                            bords[i+1][j+1]/=tuinXs[k];
-                        }
-                        if(xy!=tuwins[k]&&xy%tuinYs[k]==0&&xy!=tuinYs[k]){
-                            bords[i+1][j+1]/=tuinYs[k];
-                        }
-                    }
-                }
-                if(countB>=2){
-                    for(let j=0;j<9;j++){
-                        let xy=bords[j+1][i+1];
-                        if(xy!=tuwins[k]&&xy%tuinXs[k]==0&&xy!=tuinXs[k]){
-                            bords[j+1][i+1]/=tuinXs[k];
-                        }
-                        if(xy!=tuwins[k]&&xy%tuinYs[k]==0&&xy!=tuinYs[k]){
-                            bords[j+1][i+1]/=tuinYs[k];
-                        }
-                    }
-                }
-                if(countC>=2){
-                    for(let j=0;j<9;j++){
-                        let i4=(i/3|0)*3;
-                        let i3=(j/3|0);
-                        let j4=(i%3)*3;
-                        let j3=(j%3);
-                        let i2=i4+i3;
-                        let j2=j4+j3;
-                        let xy=bords[i2+1][j2+1];
-                        if(xy!=tuwins[k]&&xy%tuinXs[k]==0&&xy!=tuinXs[k]){
-                            bords[i2+1][j2+1]/=tuinXs[k];
-                        }
-                        if(xy!=tuwins[k]&&xy%tuinYs[k]==0&&xy!=tuinYs[k]){
-                            bords[i2+1][j2+1]/=tuinYs[k];
-                        }
-                    }
                 }
             }
         }
@@ -842,6 +785,78 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                 }
             }
         }
+        for(let k=0;k<36;k++){//候補が二つに関する処理 その2
+            let countA2=0;
+            let countB2=0;
+            let countC2=0;
+            for(let i=0;i<9;i++){
+                countA2=0;
+                countB2=0;
+                countC2=0;
+                for(let j=0;j<9;j++){
+                    if(bords[i+1][j+1]==tuwins[k]){
+                        countA2++;
+                        console.log((i+1)+' '+(j+1)+' かうんとA'+countA2+' '+bords[i+1][j+1]+' '+tuwins[k]);
+                    }
+                    if(bords[j+1][i+1]==tuwins[k]){
+                        countB2++;
+                        console.log((j+1)+' '+(i+1)+' かうんとB'+countB2+' '+bords[j+1][i+1]+' '+tuwins[k]);
+                    }
+                    let i4=(i/3|0)*3;
+                    let i3=(j/3|0);
+                    let j4=(i%3)*3;
+                    let j3=(j%3);
+                    let i2=i4+i3;
+                    let j2=j4+j3;
+                    if(bords[i2+1][j2+1]==tuwins[k]){
+                        countC2++;
+                        console.log((j+1)+' '+(i+1)+' かうんとC'+countC2+' '+bords[i2+1][j2+1]+' '+tuwins[k]);
+                    }
+                }
+                if(countA2==2){
+                    for(let j=0;j<9;j++){
+                        if(bords[i+1][j+1]!=tuwins[k]&&bords[i+1][j+1]%tuinXs[k]==0&&bords[i+1][j+1]!=tuinXs[k]){
+                            console.log((i+1)+' '+(j+1)+' '+bords[i+1][j+1]+' /'+tuinXs[k]+' !='+tuwins[k]);
+                            bords[i+1][j+1]/=tuinXs[k];
+                        }
+                        if(bords[i+1][j+1]!=tuwins[k]&&bords[i+1][j+1]%tuinYs[k]==0&&bords[i+1][j+1]!=tuinYs[k]){
+                            console.log((i+1)+' '+(j+1)+' '+bords[i+1][j+1]+' /'+tuinYs[k]+' !='+tuwins[k]);
+                            bords[i+1][j+1]/=tuinYs[k];
+                        }
+                    }
+                }
+                if(countB2==2){
+                    for(let j=0;j<9;j++){
+                        if(bords[j+1][i+1]!=tuwins[k]&&bords[j+1][i+1]%tuinXs[k]==0&&bords[j+1][i+1]!=tuinXs[k]){
+                            console.log((j+1)+' '+(i+1)+' '+bords[j+1][i+1]+' /'+tuinXs[k]+' !='+tuwins[k]);
+                            bords[j+1][i+1]/=tuinXs[k];
+                        }
+                        if(bords[j+1][i+1]!=tuwins[k]&&bords[j+1][i+1]%tuinYs[k]==0&&bords[j+1][i+1]!=tuinYs[k]){
+                            console.log((j+1)+' '+(i+1)+' '+bords[j+1][i+1]+' /'+tuinYs[k]+' !='+tuwins[k]);
+                            bords[j+1][i+1]/=tuinYs[k];
+                        }
+                    }
+                }
+                if(countC2==2){
+                    for(let j=0;j<9;j++){
+                        let i4=(i/3|0)*3;
+                        let i3=(j/3|0);
+                        let j4=(i%3)*3;
+                        let j3=(j%3);
+                        let i2=i4+i3;
+                        let j2=j4+j3;
+                        if(bords[i2+1][j2+1]!=tuwins[k]&&bords[i2+1][j2+1]%tuinXs[k]==0&&bords[i2+1][j2+1]!=tuinXs[k]){
+                            console.log((i+1)+' '+(j+1)+' '+bords[i+1][j+1]+' /'+tuinXs[k]+' !='+tuwins[k]);
+                            bords[i2+1][j2+1]/=tuinXs[k];
+                        }
+                        if(bords[i2+1][j2+1]!=tuwins[k]&&bords[i2+1][j2+1]%tuinYs[k]==0&&bords[i2+1][j2+1]!=tuinYs[k]){
+                            console.log((i2+1)+' '+(j2+1)+' '+bords[i2+1][j2+1]+' /'+tuinYs[k]+' !='+tuwins[k]);
+                            bords[i2+1][j2+1]/=tuinYs[k];
+                        }
+                    }
+                }
+            }
+        }
         if(checkReturn()){//完全解答と作問間違いのチェック
             return;
         }
@@ -861,6 +876,7 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
         if(bfNum>afNum){//進展があればコンティニュー
             continue;
         }
+        break;
     }//ロジカル内ループ
     if(isRand){
         return;
@@ -872,21 +888,23 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
             copyBords[i][j]=bords[i][j];
         }
     }
-    dispBord();
-    const b=document.createElement('b');
-    const br=document.createElement('br');
-    b.classList.add("iptN");
-    br.classList.add("iptN");
-    b.textContent='ランダム解析フェーズ';
-    numpreMsg.appendChild(b);
-    numpreMsg.appendChild(br);
-    const button=document.createElement('button');//中止ボタン
-    button.textContent='解析を中止する';
-    button.setAttribute('onclick', "endLoop()");
-    button.classList.add("iptN");
-    numpreMsg.appendChild(button);
-    numpreMsg.appendChild(br);
-    challengeRandom();
+    const promise = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      dispBord();
+      const b=document.createElement('b');
+      const br=document.createElement('br');
+      b.classList.add("iptN");
+      br.classList.add("iptN");
+      b.textContent='ランダム解析フェーズ';
+      numpreMsg.appendChild(b);
+      numpreMsg.appendChild(br);
+      resolve();
+    }, 10);
+  });
+  
+  promise.then(function(){
+    waitForDisplay();
+  });
   }
   function endLoop(){
     isRanLoop=false;
@@ -898,6 +916,17 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
     numpreMsg.appendChild(br);
     numpreMsg.appendChild(b);
   }
+}
+function waitForDisplay(){
+    const promise = new Promise(function(resolve, reject){
+        setTimeout(function(){
+          resolve();
+        }, 50);
+      });
+      
+      promise.then(function(){
+          challengeRandom();
+      });
 }
   function fireBeam( x, k, n){//ブロック内の偏りからのビームで候補除去
     if(n<3){
@@ -920,43 +949,64 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
   }
 
   function challengeRandom(){
-    // while(isRanLoop){
-    //     bfNum=afNum;
-    //     afNum=0;
-    //     bfNum2=afNum2;
-    //     afNum2=0;
-    //     loopCount++;
-    //     while(true){
+    while(isRanLoop){
+        bfNum=afNum;
+        afNum=0;
+        bfNum2=afNum2;
+        afNum2=0;
+        loopCount++;
+        while(true){
             
-    //         let i= Math.floor( Math.random() * 9 );
-    //         let j= Math.floor( Math.random() * 9 );
-    //         let s= Math.floor( Math.random() * 9 );
-    //         if(bords[i+1][j+1]==2||bords[i+1][j+1]==3||bords[i+1][j+1]==5||bords[i+1][j+1]==7||bords[i+1][j+1]==11||bords[i+1][j+1]==13||bords[i+1][j+1]==17||bords[i+1][j+1]==19||bords[i+1][j+1]==23){
-    //             continue;
-    //         }else{
-    //             for(let x=0;x<9;x++){
-    //                 let k=(s+x)%9+1;
-    //                 if(bords[i+1][j+1]%priNum[k]==0){
-    //                     bords[i+1][j+1]=priNum[k];
-    //                     determineNumber(i,j,k);
-    //                     break;
-    //                 }
-    //             }
-    //             break;
-    //         }
-    //     }
-    //     if(checkReturn()){//完全解答と作問間違いのチェック
-    //         return;
-    //     }
-    //     if(loopCount%21==0||afNum>60){
-    //         solveTheProblem();
-    //     }
-    //     if(loopCount%1000==0){
-    //         for(let i=1;i<10;i++){//コピーから復元
-    //             for(let j=1;j<10;j++){
-    //                 bords[i][j]=copyBords[i][j];
-    //             }
-    //         }
-    //     }
-    // }
+            let i= Math.floor( Math.random() * 9 );
+            let j= Math.floor( Math.random() * 9 );
+            let s= Math.floor( Math.random() * 9 );
+            if(bords[i+1][j+1]==2||bords[i+1][j+1]==3||bords[i+1][j+1]==5||bords[i+1][j+1]==7||bords[i+1][j+1]==11||bords[i+1][j+1]==13||bords[i+1][j+1]==17||bords[i+1][j+1]==19||bords[i+1][j+1]==23){
+                continue;
+            }else{
+                for(let x=0;x<9;x++){
+                    let k=(s+x)%9+1;
+                    if(bords[i+1][j+1]%priNum[k]==0){
+                        bords[i+1][j+1]=priNum[k];
+                        determineNumber(i,j,k);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        if(checkReturn()){//完全解答と作問間違いのチェック
+            return;
+        }
+        if(loopCount%21==0||afNum>60){
+            solveTheProblem();
+        }
+        if(loopCount%10000==0){
+            for(let i=1;i<10;i++){//コピーから復元
+                for(let j=1;j<10;j++){
+                    bords[i][j]=copyBords[i][j];
+                }
+            }
+            
+    const promise = new Promise(function(resolve, reject){
+        setTimeout(function(){
+          dispBord();
+          const b=document.createElement('b');
+          b.classList.add("iptN");
+          b.textContent='・';
+          numpreMsg.appendChild(b);
+          if(loopCount%80000==0){
+      const br=document.createElement('br');
+      br.classList.add("iptN");
+      numpreMsg.appendChild(br);
+          }
+          resolve();
+        }, 10);
+      });
+      
+      promise.then(function(){
+        challengeRandom();
+      });
+      return;
+        }
+    }
   }
