@@ -44,6 +44,18 @@ if(!isRun){//ページ読み込み直後に実行する作問系ボタン
     run.appendChild(input);
 }
 function retry(){//作問エラー時の作問系ボタン再実装
+    isRun=false;
+    isClear=false;
+    afNum2=729;//通過後の候補数
+    isError=false;//エラー点灯
+    isRand=false;//ランダム試行段階突入フラグ
+    isRanLoop=false;
+    for(let i=1;i<=9;i++){
+        for(let j=1;j<=9;j++){
+            finalBords[i][j]=0;
+            finalBordsD[i][j]=0;
+        }
+    }
     for(let i=1;i<10;i++){
         const button=document.createElement('button');//1～9のボタン
         button.textContent=i;
@@ -271,13 +283,6 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
     }
     checkError();
     if(isError&&!isRand){
-        for(let i=1;i<=9;i++){
-            for(let j=1;j<=9;j++){
-                finalBords[i][j]=0;
-            }
-        }
-      isRun=false;
-      isError=false;
       const b=document.createElement('b');
       const br=document.createElement('br');
       b.classList.add("iptN");
@@ -1004,7 +1009,20 @@ function waitForDisplay(){
       });
       
       promise.then(function(){
+        if(loopCount%320000==0){
+    const br=document.createElement('br');
+    br.classList.add("iptN");
+    const b=document.createElement('b');
+    b.classList.add("iptN");
+    br.classList.add("iptN");
+    b.textContent='解析を中断します';
+    numpreMsg.appendChild(b);
+    numpreMsg.appendChild(br);
+    retry();
+    return;
+        }else{
         challengeRandom();
+        }
       });
       return;
         }
