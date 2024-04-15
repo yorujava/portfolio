@@ -62,3 +62,8 @@ b.iptN{
     text-shadow: 2px 1px rgb(129, 129, 77);
     border: none;
 }
+#reload{
+    margin: 0;
+    font-size: 0.6em;
+    padding: 0.1em 0.5em;
+}
