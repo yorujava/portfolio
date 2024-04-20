@@ -116,7 +116,7 @@ main p{
   margin: 0.5em;
 }
 /* メインの中のブロックの種類 */
-.privacyPolicy, .home, .login{
+.privacyPolicy, .home, .login,.works{
   max-width: 1400px;
   margin: 1.5em;
   font-size: 0.8em;
@@ -125,13 +125,13 @@ main p{
   border-radius: 2em ;
   box-shadow: var(--boxShadow01);
 }
-.home h3{
+.home h3,.works h3{
   border-left: solid 1em #68404000;
   line-height: 0.9em;
   padding: 0.1em 0 0 0.35em;
   border-bottom: solid 0.4em #c1ccd3;
 }
-.home p{
+.home p,.works p{
   margin-top: 1em;
 }
 p.url{
