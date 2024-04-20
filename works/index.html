@@ -13,22 +13,18 @@
 
 <main>
     <section class="fadeIn">
-        <h2 class="works">PORTFOLIO｜Home｜</h2>
-        <article class="works">
-          <h3>概要</h3>
-          <p>このWebサイトはYoruJabaTM(仮)の個人ポートフォリオとして制作されています。</p>
-          <p>Webページ自体がポートフォリオであり、また、メニューの<span class="maker">ポートフォリオにて動画やゲームなどの作品を確認できます。</span></p>
-          <p class="url"><a href="https://yorujava.github.io/portfolio/works/" class="url">https://yorujava.github.io/portfolio/works/</a></p>
-          <p>GitHubにてファイルや更新歴を確認できます。</p>
-          <p class="url"><a href="https://github.com/yorujava/portfolio" class="url">https://github.com/yorujava/portfolio</a></p>
+        <h2 class="home">PORTFOLIO｜作品｜</h2>
+      <div class="width">
+        <article class="works" onClick="location.href='numberPlace/numberPlace.html'">
+          <h3>解かせる数独</h3>
+          <h4>JavaScript & Java</h4>
+          <figure><img src="../material/numpre.png" alt="数独のイメージ画像"></figure>
+          <p>数独(ナンバープレイス、ナンプレ)の問題を記入し、JavaScriptによる解析で解答を導き出します。Javaによる問題作成プログラムも掲載しています。空の問題に対しても解答の内の一つを生成します。</p>
         </article>
-        <article class="works">
-          <h3>ログインについて</h3>
-          <p>ハンバーガーメニューからタグを閉じるまで有効な表示名（ID）を取得できます。現在は <b id="idName"></b> です。</p>
-        </article>
-        <article class="works">
-          <h3></h3>
-          <p></p>
+        <article class="works" onClick="location.href='#hamburgerMenu'">
+          <h3>ログイン機能</h3>
+          <h4>JavaScript</h4>
+          <p>ハンバーガーメニューから表示名（ID）を取得できます。タブを閉じるまで有効（セッションスコープ）です。バックエンド言語も使えますので、サーバー稼働中ずっと有効な会員登録も書くことが可能です。サーブレット、JSP、MySQLを習得しています。</p>
         </article>
         <article class="works">
           <h3></h3>
@@ -42,6 +38,11 @@
           <h3></h3>
           <p></p>
         </article>
+        <article class="works">
+          <h3></h3>
+          <p></p>
+        </article>
+      </div>
       </section>
     
 
