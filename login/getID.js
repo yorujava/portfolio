@@ -54,17 +54,17 @@ $(window).on('load', function(){
         const button=document.createElement('button');
     
         span0.textContent='ワンセッションのユーザー名とPASSを設定。（タブを閉じるまで有効な表示名の設定です。）';
-        spanId.textContent='セッションID：';
+        spanId.textContent='セッションID(1~20)：';
         inputId.type='text';
         inputId.id='login-id';
-        inputId.placeholder='名前（1～20文字）';
+        inputId.placeholder='採用タロウ';
         inputId.pattern='.{1,20}';
         inputId.title='1～20文字で設定してください';
         inputId.classList.add("login-id");
-        spanPass.textContent='パスワード：';
+        spanPass.textContent='パスワード(3~60)：';
         inputPass.type='password';
         inputPass.id='login-pass';
-        inputPass.placeholder='半角英数字記号3～60文字';
+        inputPass.placeholder='Abc-123';
         inputPass.pattern='[!-~]{3,60}';
         inputPass.title='半角英数字記号3～60文字で設定してください';
         inputPass.classList.add("login-pass");
