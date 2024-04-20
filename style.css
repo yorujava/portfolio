@@ -230,7 +230,7 @@ nav.hamburgerMenu{
   display: block;
   position: fixed;
   background-color: #fff;
-  right: -10em;
+  right: -20em;
   height: 100%;
   transition: all 0.3s;
   z-index: 3;
