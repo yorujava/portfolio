@@ -250,7 +250,7 @@ nav.hamburgerMenu a.menuClose{
   transition: all 0.3s;
 }
 nav.hamburgerMenu:target a.menuClose{
-  right: 10.74em;
+  right: 11em;
 }
 nav .inner{
   padding: 1.5em;
