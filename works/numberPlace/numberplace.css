@@ -1,25 +1,30 @@
 #right{
-    width: 280px;
+    width: 104%;
+    max-width: 280px;
     font-size: 19px;
     padding: 6px;
     background-color: rgb(222, 236, 241);
     vertical-align:top;
     margin-top: 1em;
-
+    position:relative;
+    left: -0.5em;
 }
 #center{
+    width: 0.8em;
+    height: 0.2em;
+}
+#left{
     width: 14em;
     vertical-align:top;
 }
 .numpre{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
 
 }
 table.outside{
     background-color: #4f71ce;
-    margin-left: -0.5em;
 }
 table.inside{
     border-collapse:  collapse;
