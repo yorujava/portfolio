@@ -526,7 +526,7 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                     }
                 }
                 if(countA==2&&finalBordsD[pointA1+1][i+1]==0&&finalBordsD[pointA2+1][i+1]==0){
-                    if(bords[pointA1+1][i+1]!=tuinXs[k]&&bords[pointA1+1][i+1]!=tuinYs[k]&&bords[pointA2+1][i+1]!=tuinXs[k]&&bords[pointA2+1][i+1]!=tuinYs[k]){
+                    if(bords[pointA1+1][i+1]!=tuinXs[k]&&bords[pointA1+1][i+1]!=tuinYs[k]&&bords[pointA2+1][i+1]!=tuinXs[k]&&bords[pointA2+1][i+1]!=tuinYs[k]&& bords[pointA1+1][i+1]%tuwins[k]==0 && bords[pointA2+1][i+1]%tuwins[k]==0){
                     if(!isRand){
                         finalBordsD[pointA1+1][i+1]=1;
                         finalBordsD[pointA2+1][i+1]=1;
@@ -536,7 +536,7 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                     }
                 }
                 if(countB==2&&finalBordsD[i+1][pointB1+1]==0&&finalBordsD[i+1][pointB2+1]==0){
-                    if(bords[i+1][pointB1+1]!=tuinXs[k]&&bords[i+1][pointB1+1]!=tuinYs[k]&&bords[i+1][pointB2+1]!=tuinXs[k]&&bords[i+1][pointB2+1]!=tuinYs[k]){
+                    if(bords[i+1][pointB1+1]!=tuinXs[k]&&bords[i+1][pointB1+1]!=tuinYs[k]&&bords[i+1][pointB2+1]!=tuinXs[k]&&bords[i+1][pointB2+1]!=tuinYs[k]&& bords[i+1][pointB1+1]%tuwins[k]==0 && bords[i+1][pointB2+1]%tuwins[k]==0){
                     if(!isRand){
                         finalBordsD[i+1][pointB1+1]=1;
                         finalBordsD[i+1][pointB2+1]=1;
@@ -546,7 +546,7 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                 }
                 }
                 if(countC==2&&finalBordsD[pointCx1+1][pointCy1+1]==0&&finalBordsD[pointCx2+1][pointCy2+1]==0){
-                    if(bords[pointCx1+1][pointCy1+1]!=tuinXs[k]&&bords[pointCx1+1][pointCy1+1]!=tuinYs[k]&&bords[pointCx2+1][pointCy2+1]!=tuinXs[k]&&bords[pointCx2+1][pointCy2+1]!=tuinYs[k]){
+                    if(bords[pointCx1+1][pointCy1+1]!=tuinXs[k]&&bords[pointCx1+1][pointCy1+1]!=tuinYs[k]&&bords[pointCx2+1][pointCy2+1]!=tuinXs[k]&&bords[pointCx2+1][pointCy2+1]!=tuinYs[k]&& bords[pointCx1+1][pointCy1+1]%tuwins[k]==0 && bords[pointCx2+1][pointCy2+1]%tuwins[k]==0){
                     if(!isRand){
                         finalBordsD[pointCx1+1][pointCy1+1]=1;
                         finalBordsD[pointCx2+1][pointCy2+1]=1;
@@ -801,11 +801,9 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                 for(let j=0;j<9;j++){
                     if(bords[i+1][j+1]==tuwins[k]){
                         countA2++;
-                        console.log((i+1)+' '+(j+1)+' かうんとA'+countA2+' '+bords[i+1][j+1]+' '+tuwins[k]);
                     }
                     if(bords[j+1][i+1]==tuwins[k]){
                         countB2++;
-                        console.log((j+1)+' '+(i+1)+' かうんとB'+countB2+' '+bords[j+1][i+1]+' '+tuwins[k]);
                     }
                     let i4=(i/3|0)*3;
                     let i3=(j/3|0);
@@ -815,17 +813,14 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                     let j2=j4+j3;
                     if(bords[i2+1][j2+1]==tuwins[k]){
                         countC2++;
-                        console.log((j+1)+' '+(i+1)+' かうんとC'+countC2+' '+bords[i2+1][j2+1]+' '+tuwins[k]);
                     }
                 }
                 if(countA2==2){
                     for(let j=0;j<9;j++){
                         if(bords[i+1][j+1]!=tuwins[k]&&bords[i+1][j+1]%tuinXs[k]==0&&bords[i+1][j+1]!=tuinXs[k]){
-                            console.log((i+1)+' '+(j+1)+' '+bords[i+1][j+1]+' /'+tuinXs[k]+' !='+tuwins[k]);
                             bords[i+1][j+1]/=tuinXs[k];
                         }
                         if(bords[i+1][j+1]!=tuwins[k]&&bords[i+1][j+1]%tuinYs[k]==0&&bords[i+1][j+1]!=tuinYs[k]){
-                            console.log((i+1)+' '+(j+1)+' '+bords[i+1][j+1]+' /'+tuinYs[k]+' !='+tuwins[k]);
                             bords[i+1][j+1]/=tuinYs[k];
                         }
                     }
@@ -833,11 +828,9 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                 if(countB2==2){
                     for(let j=0;j<9;j++){
                         if(bords[j+1][i+1]!=tuwins[k]&&bords[j+1][i+1]%tuinXs[k]==0&&bords[j+1][i+1]!=tuinXs[k]){
-                            console.log((j+1)+' '+(i+1)+' '+bords[j+1][i+1]+' /'+tuinXs[k]+' !='+tuwins[k]);
                             bords[j+1][i+1]/=tuinXs[k];
                         }
                         if(bords[j+1][i+1]!=tuwins[k]&&bords[j+1][i+1]%tuinYs[k]==0&&bords[j+1][i+1]!=tuinYs[k]){
-                            console.log((j+1)+' '+(i+1)+' '+bords[j+1][i+1]+' /'+tuinYs[k]+' !='+tuwins[k]);
                             bords[j+1][i+1]/=tuinYs[k];
                         }
                     }
@@ -851,11 +844,9 @@ function checkReturn(){//クリア＆エラー処理ブーリアン返し
                         let i2=i4+i3;
                         let j2=j4+j3;
                         if(bords[i2+1][j2+1]!=tuwins[k]&&bords[i2+1][j2+1]%tuinXs[k]==0&&bords[i2+1][j2+1]!=tuinXs[k]){
-                            console.log((i+1)+' '+(j+1)+' '+bords[i+1][j+1]+' /'+tuinXs[k]+' !='+tuwins[k]);
                             bords[i2+1][j2+1]/=tuinXs[k];
                         }
                         if(bords[i2+1][j2+1]!=tuwins[k]&&bords[i2+1][j2+1]%tuinYs[k]==0&&bords[i2+1][j2+1]!=tuinYs[k]){
-                            console.log((i2+1)+' '+(j2+1)+' '+bords[i2+1][j2+1]+' /'+tuinYs[k]+' !='+tuwins[k]);
                             bords[i2+1][j2+1]/=tuinYs[k];
                         }
                     }
