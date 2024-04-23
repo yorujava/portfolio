@@ -32,8 +32,8 @@ body{
 }
 /* タイトルのフォントをファイルに用意 */
 @font-face {
-    font-family: Pacifico;
-    src: url(material\Pacifico-Regular.ttf);
+    font-family: StalinistOne;
+    src: url('material/StalinistOne-Regular.ttf') format('truetype');
 }
 /* ヘッダーフッターの設定 */
 #header{
@@ -61,7 +61,7 @@ h1{
   font-size: 1em;
   margin: 0 0 0 0;
   padding: 0 0.3em 0.2em 1em;
-  font-family: Pacifico ;
+  font-family: StalinistOne ;
 }
 h1 a{
   color:var(--color01-h1);
