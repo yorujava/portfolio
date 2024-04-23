@@ -32,8 +32,8 @@ body{
 }
 /* タイトルのフォントをファイルに用意 */
 @font-face {
-    font-family: GAU Love Rocket;
-    src: url(material/GAU_Love_Rocket.ttf);
+    font-family: Pacifico;
+    src: url(material\Pacifico-Regular.ttf);
 }
 /* ヘッダーフッターの設定 */
 #header{
@@ -61,7 +61,7 @@ h1{
   font-size: 1em;
   margin: 0 0 0 0;
   padding: 0 0.3em 0.2em 1em;
-  font-family: GAU Love Rocket ;
+  font-family: Pacifico ;
 }
 h1 a{
   color:var(--color01-h1);
