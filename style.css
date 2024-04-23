@@ -32,8 +32,8 @@ body{
 }
 /* タイトルのフォントをファイルに用意 */
 @font-face {
-    font-family: StalinistOne;
-    src: url('material/StalinistOne-Regular.ttf') format('truetype');
+    font-family: DiplomataSC;
+    src: url('material/DiplomataSC-Regular.ttf') format('truetype');
 }
 /* ヘッダーフッターの設定 */
 #header{
@@ -59,9 +59,10 @@ a.footer{
 }
 h1{
   font-size: 1em;
+  letter-spacing: 0.2em;
   margin: 0 0 0 0;
   padding: 0 0.3em 0.2em 1em;
-  font-family: StalinistOne ;
+  font-family: DiplomataSC ;
 }
 h1 a{
   color:var(--color01-h1);
