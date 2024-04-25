@@ -1,5 +1,5 @@
 
-fetch("https://yorujava.github.io/portfolio/include/header.html")
+fetch("include/header.html")
 .then((response) => response.text())
 .then((data) => document.querySelector("#header").innerHTML = data);
 fetch("https://yorujava.github.io/portfolio/include/footer.html")
@@ -62,3 +62,18 @@ $(window).on('load', function(){
   idName.appendChild(span2);
   }
 })
+//スクロール領域を取得
+const area = document.getElementById("area");
+
+//スクロールを禁止する関数
+function ban() {
+  location.href='#hamburgerMenu'
+  area.style.overflowY= "hidden";
+}
+
+
+//禁止を解除する関数
+function lift() {
+  area.style.overflowY = "auto";
+  history.back();
+}
