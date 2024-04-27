@@ -1,0 +1,12 @@
+#pyLoad{
+    text-align: center;
+}
+.nowLoading{
+    line-height:15em;
+    color: brown;
+}
+#carTripPy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -13,7 +13,7 @@
         packages = ["matplotlib","numpy","pillow"]
         [[fetch]]
         from = "image"
-        files = [["../../material/ja_map.png"],[carTrip.py]]
+        files = ["./material/ja_map.png"]
     </py-config>
 </head>
 <body>
@@ -27,7 +27,11 @@
         <article class="home">
             <h3 class="home"></h3>
             <img src="../../material/ja_map.png">
-            <div id="carTripPy"></div>
+            <div id="carTripPy">
+
+                <div id="mlp"></div>
+                <script type="py" src="carTrip2.py"></script>
+            </div>
             <div id="pyLoad"></div>
          
         </article>
