@@ -35,6 +35,9 @@ body{
     font-family: DiplomataSC;
     src: url('material/DiplomataSC-Regular.ttf') format('truetype');
 }
+.diplomataSC{
+  font-family: DiplomataSC ;
+}
 /* ヘッダーフッターの設定 */
 #header{
   top:0;
@@ -210,6 +213,10 @@ article.login{
 .privacyPolicy h3{
   font-size: 1.2em;
   margin: 2em 0 0 0;
+}
+.lang{
+  margin-left: 3em;
+  color: #ff514b;
 }
 /* フェードインのための記述 */
 .fadeIn{
