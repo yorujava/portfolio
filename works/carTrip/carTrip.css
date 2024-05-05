@@ -1,3 +1,11 @@
+#reload{
+    position:relative;
+    top:-10px;
+    left: 82px;
+    height: 24px;
+    font-size: 14px;
+    margin-bottom: -14px;
+}
 #pyLoad{
     text-align: center;
 }
@@ -56,19 +64,43 @@ article{
     width: 348px;
     margin-bottom: 8px;
 }
-ul{padding-left: 10%;
-    
+ul{
+    padding-left: 10%;
 }
 body{
     min-width: 460px;
 }
 main{
     margin-top: 6.2em;
-  padding: 0.1em 0.1em 1em 0.1em;
-  min-height: 65vh;
-  min-width: 450px;
-  background-color: var(--color06-mainBack);
+    padding: 0.1em 0.1em 1em 0.1em;
+    min-height: 65vh;
+    min-width: 450px;
+    background-color: var(--color06-mainBack);
 }
 .home{
     min-width: 360px;
+}
+#dispNum{
+    font-size: 14px;
+    position:relative;
+    top:-12px;
+    left: 10px;
+    color: rgb(68, 128, 156);
+}
+#goToArea{
+    text-align: center;
+    margin: 12px 0;
+}
+#canvas{
+    min-height: 110px;
+}
+#pyLoad{
+    position:relative;
+    top:-160px;
+}
+#monitor{
+    min-height: 255px;
+}
+#nextReq{
+    line-height:53px;
 }
