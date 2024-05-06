@@ -15,7 +15,7 @@ def graph(e):
     plt.xlim(0, 100)
     
     x7 = ['pop','yen','HP','gas','spd']
-    y7 = [py_pop,py_yen//1000000, py_hp,py_gas,py_spd]
+    y7 = [py_pop,py_yen, py_hp,py_gas,py_spd]
 
     plt.barh(x7, y7)
     display(plt, target="canvas")
