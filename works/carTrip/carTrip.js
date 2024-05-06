@@ -65,7 +65,7 @@ const carList=[
   ['Mazda CX-5',13.87,56,330,138],
   ['アウディA8',7.32,64,1400,173]];
 const wayList=['shitamichi','highway']
-const mapIdList=['hokkaido','aomori','iwate','miyagi','akita','yamagata','hukusima','ibaraki','tochigi','gunma','saitama','chiba','tokyo','kanagawa','yamanashi','nagano','nigata','toyama','ishikawa','hukui','gihu','sizuoka','aichi','mie','shiga','kyoto','osaka','hyogo','nara','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi','tokushima','kagawa','aichi','kochi','hukuoka','saga','nagasaki','kumamoto','oita','miyazaki','kagoshima','okinawa'];
+const mapIdList=['hokkaido','aomori','iwate','miyagi','akita','yamagata','hukusima','ibaraki','tochigi','gunma','saitama','chiba','tokyo','kanagawa','yamanashi','nagano','nigata','toyama','ishikawa','hukui','gihu','sizuoka','aichi','mie','shiga','kyoto','osaka','hyogo','nara','wakayama','tottori','shimane','okayama','hiroshima','yamaguchi','tokushima','kagawa','ehime','kochi','hukuoka','saga','nagasaki','kumamoto','oita','miyazaki','kagoshima','okinawa'];
 const mapList=[
   ['北海道',1360,1700,0],
   ['青森県',1402,1402,1],
