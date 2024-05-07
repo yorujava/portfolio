@@ -120,6 +120,7 @@ var isSet=true;
 var isDriving=false;
 var isStop=true;
 var isGameOver=false;
+var isClear=false;
 var notice='お待ちください...';
 
 var whatDay=1;
@@ -306,7 +307,7 @@ function giveALecture(){
 
 
       notice='収支 +'+bop+'円';
-      if(i==20){
+      if(i==20 && isClear==false){
         monitor.innerHTML='<video poster="../../material/drive2.jpg" id="animation" loop muted autoplay playsinline></video>';
         nextGoal=Math.floor( Math.random() * 47 );
         notice='次の目的地は'+mapList[nextGoal][0]+'です';
@@ -326,6 +327,18 @@ function giveALecture(){
 }
 //■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□
 function gameCheck(){
+  if(moneyNow>=100000000){
+    isStop=true;
+    notice='ゲームクリア！';
+    if(isClear==false){
+      monitor.innerHTML='<video src="../../material/clear.mp4" id="animation" loop muted autoplay playsinline></video>';
+      setTimeout(function(){
+        updateDisplay();
+      }, 500);
+    }
+    isClear=true;
+    return true;
+  }
   if(moneyNow<=0||gasNow<=0||py_hp<=0){
     isStop=true;
     if(moneyNow<=0){
