@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SuperMarioCode.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+  <pre><code>    
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace SuperMario
+{
+    public partial class Form1 : Form
+    {
+        const int WIDTH = 16;//ゲームエリア横のマス数
+        const int HEIGHT = 13;//ゲームエリア縦のマス数
+        int[,] map01 = {
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,2,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,2,3,2,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,3,0,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0,0,0,0,5,6,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,4,4,0,0,0,0,0,5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,8,0,0,0,0,0,7,8,0,0,0,0,0,7,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,4,4,4,0,0,0,0,7,8,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+        };//表計算ソフト CVS 出力からマップの配置配列を作成
+        int goX = 0;//画面スクロールしたピクセル数
+        int goNum = 1;//強制スクロールに加算する速度
+        int stopLoop = 0;//スクロールを止めて処理するときのカウンター
+        int gameLoop = 0;//ゲームの周回数
+
+        int marioX;//マリオのX位置
+        int marioY;//マリオのY位置
+        int marioAnime = 0;//マリオ歩きアニメーション管理カウンター
+        int jumpHi;//ジャンプ力計算用
+        int jumpSp;//空中の縦の速度
+        int jumpLv;//空中速度を計算するための進行レベル
+        bool isLeft;//マリオ左移動フラグ
+        bool isRight;//マリオ右移動フラグ
+        bool isJump;//マリオジャンプフラグ
+        bool isFoll;//マリオ落下フラグ
+        bool isDash;//マリオダッシュフラグ
+        bool isDashSub;//マリオダッシュサブフラグ
+        bool isOut;//マリオ失敗フラグ
+
+        int posiX;//map01上でのマリオ位置X
+        int posiY;//map01上でのマリオ位置Y
+
+        int outLoopCount = 0;//アウトになった時の処理カウンター
+
+        bool kinokoFlg = false;//キノコ出現フラグ
+
+        int kinokoX;//キノコの位置X
+        int kinokoY;//キノコの位置Y
+        bool isKinokoLeft;//キノコ左移動フラグ
+        bool isGetKinoko;//キノコ入手フラグ
+        bool iskinokoEnd;
+
+        bool isBig;//マッチョマリオフラグ
+        int mutekiTime;//チビマリオ化した時の無敵猶予カウンター
+
+        bool[] hatenas = new bool[7];//ハテナボックスフラグ
+        int[] hatenaXs = { 288, 320, 352, 1856, 1952, 1952, 2048 };//ハテナボックスX位置配列
+        int[] hatenaYs = { 224, 128, 224, 224, 96, 224, 224 };//ハテナボックスY位置配列
+        int[] hatenaCoinDisp = new int[7];//各コイン演出カウンター配列
+
+        Font myFont = new Font(&quot;Arial&quot;, 12);//テキスト描画フォント設定
+
+        int score = 0;//ゲームスコア
+
+        bool humiJumpFlg = false;//敵を踏んで跳ねるためのフラグ
+        bool isHunduke = false;//敵を踏んだフラグ
+        int[] kuriboXList = { 896, 1344, 1920, 3040 };//クリボー出現位置X配列
+        int[] kuriboYList = { 320, 192, 320, 192 };//クリボー出現位置Y配列
+        int[] kuriboNowXs = new int[4];//クリボー現在地X配列
+        int[] kuriboNowYs = new int[4];//クリボー現在地Y配列
+        bool[] kuriboDowns = new bool[4];//クリボーが倒されたフラグ配列
+        bool[] kuriboRights = new bool[4];//クリボーが右移動に変わるフラグ配列
+        int[] kuriboHirs = new int[4];//クリボーへしゃげ演出カウンター配列
+
+        List&lt;int&gt; killerXList = new List&lt;int&gt;();//キラーX位置リスト
+        List&lt;int&gt; killerYList = new List&lt;int&gt;();//キラーY位置リスト
+        List&lt;bool&gt; killerDownList = new List&lt;bool&gt;();//キラーが倒されたリスト
+        List&lt;int&gt; killerCrashList = new List&lt;int&gt;();//キラー墜落演出カウンターリスト
+
+        bool resetFlg;//リセットフラグ
+        bool pauseFlg;//ポーズフラグ
+
+
+        public Form1()//コンストラクタ
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)//起動（ロード）時
+        {
+            kame1.Hide();//画像のコントロールを隠す
+            kame2.Hide();
+            kame3.Hide();
+            kuribo1.Hide();
+            kuribo2.Hide();
+            kuhaku.Hide();
+            jimen.Hide();
+            ishi.Hide();
+            renga.Hide();
+            coin.Hide();
+            hatena1.Hide();
+            hatena2.Hide();
+            dokan.Hide();
+            mario1.Hide();
+            mario2.Hide();
+            mario3.Hide();
+            mario4.Hide();
+            kinoko.Hide();
+            big1.Hide();
+            big2.Hide();
+            big3.Hide();
+            big4.Hide();
+            big5.Hide();
+            yobi.Hide();
+            killer.Hide();
+
+            outShadow.Controls.Add(outLabel);//ラベルの親をラベルにして影を付ける
+            outLabel.Top = -4;//影位置調整（主文字位置）
+            outLabel.Left = -5;//影位置調整（主文字位置）
+            pMap.Controls.Add(outShadow);//ラベルの親をキャラレイヤーにして透過
+            outShadow.Top = 140;//「アウト～！」表示位置調整
+
+            initGame();//ゲーム開始メソッド
+        }
+
+        private void GameSet()//複数個所で使うゲーム設定リセット
+        {
+            marioX = 200;//マリオスタート位置X
+            marioY = 320;//マリオスタート位置Y
+            kinokoFlg = false;//キノコフラグ初期化
+            isGetKinoko = false;//キノコフラグ初期化
+            iskinokoEnd = false;//キノコフラグ初期化
+            for (int i = 0; i &lt; 7; i++)//ハテナボックス初期化用for文
+            {
+                hatenas[i] = false;//ハテナボックス初期化
+                hatenaCoinDisp[i] = 0;//ハテナボックス初期化
+            }
+            humiJumpFlg = false;//敵踏みジャンプ初期化
+            isHunduke = false;//敵踏みジャンプ初期化
+            for (int i = 0; i &lt; kuriboDowns.Length; i++)//クリボー初期化for文
+            {
+                kuriboNowXs[i] = kuriboXList[i];//クリボー位置初期位置コピー
+                kuriboNowYs[i] = kuriboYList[i];//クリボー位置初期位置コピー
+                kuriboDowns[i] = false;//クリボーフラグ初期化
+                kuriboRights[i] = false;//クリボーフラグ初期化
+                kuriboHirs[i] = 0;//クリボーフラグ初期化
+            }
+
+            killerXList.Clear();//キラーリストクリア
+            killerYList.Clear();//キラーリストクリア
+            killerDownList.Clear();//キラーリストクリア
+            killerCrashList.Clear();//キラーリストクリア
+
+            Random rdm = new Random();//乱数生成
+
+            for (int i = 0; i &lt; gameLoop + goNum; i++)//周回でキラーがどんどん増える
+            {
+                killerXList.Add(rdm.Next(64, 107) * 32);//キラー初期位置ランダム
+                killerYList.Add(rdm.Next(5, 11) * 32);//キラー初期位置ランダム
+                killerCrashList.Add(0);//キラー数に合わせてフラグも追加
+                killerDownList.Add(false);//キラー数に合わせてフラグも追加
+            }
+
+        }
+        private void initGame()//ゲーム開始
+        {
+            GameSet();//マリオ位置等の設定
+            isBig = false;
+
+            posiX = (int)((marioX + 16) / 32);
+            posiY = (int)((marioY + 16) / 32);
+
+
+
+            pMap.Parent = panel1;//キャラレイヤー透過設定
+            pMap.BackColor = (Color.Transparent);
+
+
+            outShadow.Visible = false;//「アウト～！」を見えなくする
+            outLabel.Visible = false;//「アウト～！」を見えなくする
+
+
+            this.ClientSize = new System.Drawing.Size(512, 32 * HEIGHT + 28);//フォームのサイズ（ゲーム+インフォ）
+            this.panel1.Size = new System.Drawing.Size(4160, 32 * HEIGHT);//マップのサイズ
+            this.pMap.Size = new System.Drawing.Size(4160, 32 * HEIGHT);//キャラクターレイヤーのサイズ
+            info.Top = 32 * HEIGHT + 4;//ゲーム操作表示位置
+            scoreDisp.Top = 32 * HEIGHT + 4;//スコア表示位置
+
+
+            Bitmap canvas = new Bitmap(4160, 416);//キャラクターレイヤー書き込み用
+            Graphics gg = Graphics.FromImage(canvas);//キャラクターレイヤー書き込み用
+            gg.DrawImage(mario1.Image, marioX, marioY);//マリオ描画
+
+
+            pMap.Image = canvas;//キャラクターレイヤーの描画
+
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)//アップデート◆20ミリ秒◆◆◆◆◆◆
+        {
+            if (resetFlg)//リセットが押されたときの処理
+            {
+                goX = 0;
+                gameLoop = 0;
+                goNum = 1;
+                score = 0;
+                resetFlg = false;
+                pauseFlg = false;
+                initGame();
+            }
+            if (pauseFlg)//ポーズが押されていたらアップデートから即抜け
+            {
+                return;
+            }
+            if(isDashSub &amp;&amp; !isDash &amp;&amp; jumpHi == 0 &amp;&amp; 4 &lt; posiY &amp;&amp; posiY &lt; 12)
+            {
+                isDash = true;
+            }
+            scoreDisp.Text = (1 + gameLoop) + &quot;周目 SCORE: &quot; + score;//周回数スコア表示
+
+            if (kinokoFlg &amp;&amp; !isGetKinoko)//キノコ出現時
+            {
+                kinokoMove();//キノコの動き
+            }
+            if (isOut)//ゲーム失敗時
+            {
+                ForOut();//失敗処理
+                return;//メソッドから抜ける
+            }
+
+
+            goX += goNum;//マップの端に到達
+            if (goX &gt; 3400)
+            {
+                goX = 3400;
+                stopLoop++;
+            }
+            if (stopLoop &gt; 40)//20カウント後にスタート位置へ
+            {
+                GameSet();//マリオ位置等の設定
+                goNum += 1;//スクロール速度アップ
+                if (goNum &gt; 10)//スクロール速度マックス
+                {
+                    goNum = 10;
+                }
+                gameLoop++;//周回数カウント
+                goX = 0;
+                stopLoop = 0;
+                marioAnime = 0;
+
+                score += goNum * 500;
+            }
+            Bitmap canvas = new Bitmap(4160, 416);//キャラクターレイヤー書き込み用
+            Graphics gg = Graphics.FromImage(canvas);//キャラクターレイヤー書き込み用
+
+            panel1.Location = new Point(0 - goX, 0);//強制スクロール
+
+            marioAnime++;//アニメーション用カウンター
+            if (marioAnime &gt;= 100)//オーバーフロー回避
+            {
+                marioAnime = 0;//オーバーフロー回避
+            }
+
+
+            for (int i = 0; i &lt; kuriboDowns.Length; i++)//各クリボー処理for文
+            {
+                if (-16 &lt; kuriboNowXs[i] - goX &amp;&amp; kuriboNowXs[i] - goX &lt; 528 &amp;&amp; !kuriboDowns[i])
+                {
+                    kuriboMove(i);//クリボーの動きメソッド
+                    if (kuriboDowns[i])//そのクリボーがやられていたら
+                    {
+                        //何も描画しない
+                    }
+                    else if (marioAnime % 10 &lt; 5)//アニメーション処理
+                    {
+                        gg.DrawImage(kuribo2.Image, kuriboNowXs[i], kuriboNowYs[i]);
+                    }
+                    else
+                    {
+                        gg.DrawImage(kuribo1.Image, kuriboNowXs[i], kuriboNowYs[i]);
+                    }
+
+                }
+                if (kuriboHirs[i] &gt; 0)//クリボーへしゃげ演出
+                {
+                    gg.DrawImage(kuribo2.Image, kuriboNowXs[i], kuriboNowYs[i] + 7, 40, 22);
+                    kuriboHirs[i]++;
+                    if (kuriboHirs[i] &gt; 13)
+                    {
+                        kuriboHirs[i] = 0;
+                    }
+                }
+            }
+
+
+
+
+
+            MarioPosition();//マリオの動きのメソッド
+
+            if (isBig)//マッチョマリオ描画
+            {
+                if (isJump)//ジャンプ
+                {
+                    gg.DrawImage(big4.Image, marioX, marioY - 32);
+                }
+                else if (isFoll)//落下
+                {
+                    gg.DrawImage(big1.Image, marioX, marioY - 32);
+                }
+                else if (isRight || isLeft)//左右移動
+                {
+                    if (marioAnime % 9 &lt; 3)//アニメーション処理
+                    {
+                        gg.DrawImage(big2.Image, marioX, marioY - 32);
+                    }
+                    else if (marioAnime % 9 &lt; 6)
+                    {
+                        gg.DrawImage(big3.Image, marioX, marioY - 32);
+                    }
+                    else
+                    {
+                        gg.DrawImage(big5.Image, marioX, marioY - 32);
+                    }
+
+                }
+                else//無操作
+                {
+                    gg.DrawImage(big1.Image, marioX, marioY - 32);
+                }
+
+            }
+            else//チビマリオ描画
+            {
+                if (4 &lt; posiY &amp;&amp; posiY &lt; 12)
+                {
+                    if (map01[posiY % 16, posiX] != 0 &amp;&amp; marioX - goX &lt; 3)//挟まり
+                    {
+                        gg.DrawImage(mario1.Image, marioX - 1, marioY - 8, 22, 40);
+                    }
+                    else if (isJump)//ジャンプ
+                    {
+                        gg.DrawImage(mario4.Image, marioX, marioY);
+                    }
+                    else if (isFoll)//落下
+                    {
+                        gg.DrawImage(mario1.Image, marioX, marioY);
+                    }
+                    else if (isRight || isLeft)//左右移動
+                    {
+                        if (marioAnime % 6 &lt; 3)//アニメーション処理
+                        {
+                            gg.DrawImage(mario2.Image, marioX, marioY);
+                        }
+                        else
+                        {
+                            gg.DrawImage(mario3.Image, marioX, marioY);
+                        }
+
+                    }
+                    else//無操作
+                    {
+                        gg.DrawImage(mario1.Image, marioX, marioY);
+                    }
+                }
+                else
+                {
+                    if (isJump)//ジャンプ
+                    {
+                        gg.DrawImage(mario4.Image, marioX, marioY);
+                    }
+                    else if (isFoll)//落下
+                    {
+                        gg.DrawImage(mario1.Image, marioX, marioY);
+                    }
+                    else if (isRight || isLeft)//左右移動
+                    {
+                        if (marioAnime % 6 &lt; 3)//アニメーション処理
+                        {
+                            gg.DrawImage(mario2.Image, marioX, marioY);
+                        }
+                        else
+                        {
+                            gg.DrawImage(mario3.Image, marioX, marioY);
+                        }
+
+                    }
+                    else//無操作
+                    {
+                        gg.DrawImage(mario1.Image, marioX, marioY);
+                    }
+                }
+            }
+
+
+            if (kinokoFlg &amp;&amp; !isGetKinoko)//キノコの描画
+            {
+                gg.DrawImage(kinoko.Image, kinokoX, kinokoY);
+            }
+            for (int i = 0; i &lt; 7; i++)
+            {
+                if (hatenas[i])//ハテナボックス解放描画
+                {
+                    gg.DrawImage(hatena2.Image, hatenaXs[i], hatenaYs[i], 32, 32);
+                }
+                if (0 &lt; hatenaCoinDisp[i] &amp;&amp; hatenaCoinDisp[i] &lt; 8)//コイン描画
+                {
+                    gg.DrawImage(coin.Image, hatenaXs[i], hatenaYs[i] - 32 - hatenaCoinDisp[i] * 2, 32, 32);
+                    hatenaCoinDisp[i]++;
+                }
+                if (hatenaCoinDisp[i] &gt;= 8)
+                {
+                    hatenaCoinDisp[i] = 0;
+                }
+            }
+
+            for (int i = 0; i &lt; killerXList.Count; i++)//各キラー処理for文
+            {
+                if (-16 &lt; killerXList[i] - goX &amp;&amp; killerXList[i] - goX &lt; 528 &amp;&amp; !killerDownList[i])
+                {
+                    killerMove(i);
+
+                    if (killerDownList[i])
+                    {
+                        //
+                    }
+                    else
+                    {
+                        gg.DrawImage(killer.Image, killerXList[i], killerYList[i]);
+                    }
+
+                }
+                if (killerCrashList[i] &gt; 0)//キラー墜落処理
+                {
+                    killerXList[i] -= 2 + goNum;
+                    killerYList[i] += 10;
+                    killerCrashList[i]++;
+                    if (killerCrashList[i] &gt; 13)
+                    {
+                        killerCrashList[i] = 0;
+                    }
+                    else
+                    {
+                        gg.DrawImage(killer.Image, killerXList[i], killerYList[i], 32, -28);
+                    }
+                }
+
+            }
+
+            if (goX &gt; 3300)
+            {
+                gg.DrawString(&quot;周回ボーナス&quot; + (goNum * 500), myFont, Brushes.White, 3550, 150);
+                gg.DrawString(&quot;To be continued...&quot;, myFont, Brushes.White, 3550, 180);
+            }
+
+            if (4 &lt; posiY &amp;&amp; posiY &lt; 12)
+            {
+                if (map01[posiY % 16, posiX] != 0 &amp;&amp; marioX - goX &lt; 3)
+                {
+                    HitDamage();
+                }
+            }
+
+
+            if (mutekiTime % 2 == 1)
+            {
+                gg.DrawString(&quot;縮&quot;, myFont, Brushes.White, marioX, marioY);
+            }
+
+            if (mutekiTime &gt; 30)
+            {
+                mutekiTime = 0;
+            }
+            if (mutekiTime &gt; 0)
+            {
+                mutekiTime++;
+            }
+            var oldImage = pMap.Image;//メモリ解放のための準備
+            pMap.Image = canvas;//キャラクターレイヤーの描画
+
+            oldImage.Dispose();//メモリ解放
+            gg.Dispose();//メモリ解放
+
+        }
+
+        private void HitDamage()
+        {
+            if (mutekiTime &gt; 30)
+            {
+                mutekiTime = 0;
+                return;
+            }
+            if (mutekiTime &gt; 0)
+            {
+                return;
+            }
+            if (!isBig)
+            {
+                outLabel.Visible = true;
+                isOut = true;
+                return;
+            }
+            isBig = false;
+            mutekiTime += 1;
+        }
+
+        private void MarioPosition()//マリオの動き◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+        {
+            if (isLeft)//左移動オンなら
+            {
+                marioX -= 3;
+                if (isDash)
+                {
+                    marioX -= (2 + goNum);
+                }
+            }
+            if (marioX - goX &lt; 0)//画面左に出そうなら
+            {
+                marioX = goX;
+            }
+            if (isRight)//右移動オンなら
+            {
+                marioX += 3;
+                if (isDash)
+                {
+                    marioX += (2 + goNum);
+                }
+            }
+            if (marioX - goX &gt; 480)//画面右に出そうなら
+            {
+                marioX = goX + 480;
+            }
+            posiX = (int)((marioX + 16) / 32);
+            posiY = (int)((marioY + 16) / 32);
+
+
+            if (0 &lt; posiX &amp;&amp; posiX &lt; 130 &amp;&amp; 1 &lt; posiY &amp;&amp; posiY &lt; 12)
+            {
+                if (map01[posiY % 16, posiX + 1] != 0)//前方に障害物があったら
+                {
+                    if ((marioX + 16) % 32 &gt; 16)
+                    {
+                        marioX = posiX * 32;
+                    }
+                }
+                if (map01[posiY % 16, posiX - 1] != 0)//左に障害物があったら
+                {
+                    if ((marioX + 16) % 32 &lt; 16)
+                    {
+                        marioX = posiX * 32;
+                    }
+                }
+                if (map01[(posiY + 1) % 16, posiX + 1] != 0)//右下に障害物があったら
+                {
+                    if ((marioX + 16) % 32 &gt; 16 &amp;&amp; (marioY + 16) % 32 &gt; 19)
+                    {
+                        marioX = posiX * 32;
+                    }
+                }
+                if (map01[(posiY + 1) % 16, posiX - 1] != 0)//左下に障害物があったら
+                {
+                    if ((marioX + 16) % 32 &lt; 16 &amp;&amp; (marioY + 16) % 32 &gt; 19)
+                    {
+                        marioX = posiX * 32;
+                    }
+                }
+                if (map01[posiY % 16, posiX] != 0 &amp;&amp; (marioX - goX &gt; 32 &amp;&amp; mutekiTime == 0))//障害物に埋まったら
+                {
+                    if (map01[(posiY + 1) % 16, posiX] != 0)
+                    {
+                        marioY = (posiY - 1) * 32;
+                    }
+                    else if (isLeft)
+                    {
+                        marioX = (posiX + 1) * 32;
+                    }
+                    else
+                    {
+                        marioX = (posiX - 1) * 32;
+                    }
+                }
+
+                if (isBig)
+                {
+                    if (map01[(posiY - 1) % 16, posiX + 1] != 0)//前方に障害物があったら
+                    {
+                        if ((marioX + 16) % 32 &gt; 16)
+                        {
+                            marioX = posiX * 32;
+                        }
+                    }
+                    if (map01[(posiY - 1) % 16, posiX - 1] != 0)//左に障害物があったら
+                    {
+                        if ((marioX + 16) % 32 &lt; 16)
+                        {
+                            marioX = posiX * 32;
+                        }
+                    }
+                    if (map01[(posiY - 2) % 16, posiX + 1] != 0)//右上に障害物があったら
+                    {
+                        if ((marioX + 16) % 32 &gt; 16 &amp;&amp; (marioY + 16) % 32 &lt; 16)
+                        {
+                            marioX = posiX * 32;
+                        }
+                    }
+                    if (map01[(posiY - 2) % 16, posiX - 1] != 0)//左上に障害物があったら
+                    {
+                        if ((marioX + 16) % 32 &lt; 16 &amp;&amp; (marioY + 16) % 32 &lt; 16)
+                        {
+                            marioX = posiX * 32;
+                        }
+                    }
+                }
+                else
+                {
+
+                    if (map01[(posiY - 1) % 16, posiX + 1] != 0 &amp;&amp; (marioX - goX &gt; 32 &amp;&amp; mutekiTime == 0))//右上に障害物があったら
+                    {
+                        if ((marioX + 16) % 32 &gt; 16 &amp;&amp; (marioY + 16) % 32 &lt; 16)
+                        {
+                            marioX = posiX * 32;
+                        }
+                    }
+                    if (map01[(posiY - 1) % 16, posiX - 1] != 0)//左上に障害物があったら
+                    {
+                        if ((marioX + 16) % 32 &lt; 16 &amp;&amp; (marioY + 16) % 32 &lt; 16)
+                        {
+                            marioX = posiX * 32;
+                        }
+                    }
+                }
+                if (!isJump &amp;&amp; !(map01[(posiY + 1) % 16, posiX] != 0 || (map01[(posiY + 1) % 16, posiX - 1] != 0 &amp;&amp; (marioX + 16) % 32 &lt; 8) || (map01[(posiY + 1) % 16, posiX + 1] != 0 &amp;&amp; (marioX + 16) % 32 &gt; 24)))//床が無くなったら
+                {
+                    jumpHi = 9;
+                }
+
+            }
+
+
+            if ((isJump &amp;&amp; !isFoll &amp;&amp; jumpHi &lt; 127) || (isHunduke &amp;&amp; !isFoll &amp;&amp; jumpHi &lt; 127))
+            {
+                if (humiJumpFlg)
+                {
+                    isJump = true;
+                }
+                jumpLv = 6;
+                jumpSp = 9;
+                jumpHi += 9;
+                isHunduke = false;
+                humiJumpFlg = false;
+            }
+            if ((isJump &amp;&amp; jumpHi &gt;= 127) || (!isJump &amp;&amp; jumpHi &gt; 0))
+            {
+                jumpLv--;
+                jumpSp = (int)(Math.Pow(jumpLv, 2) / 4);
+                if (jumpLv &lt; 0)
+                {
+                    jumpSp *= (0 - 1);
+                    isFoll = true;
+                }
+                if (jumpSp &lt; 0 - 14)
+                {
+                    jumpSp = (0 - 14);
+                }
+            }
+            marioY -= jumpSp;
+
+            if (0 &lt; posiX &amp;&amp; posiX &lt; 130 &amp;&amp; 1 &lt; posiY &amp;&amp; posiY &lt; 12)
+            {
+
+                if ((map01[(posiY + 1) % 16, posiX] != 0 || (map01[(posiY + 1) % 16, posiX - 1] != 0 &amp;&amp; (marioX + 16) % 32 &lt; 5) || (map01[(posiY + 1) % 16, posiX + 1] != 0 &amp;&amp; (marioX + 16) % 32 &gt; 27)) &amp;&amp; (marioY + 16) % 32 &gt; 16 &amp;&amp; isFoll)//床に着地
+                {
+                    marioY = posiY * 32;
+                    isJump = false;
+                    isFoll = false;
+                    jumpHi = 0;
+                    jumpLv = 0;
+                    jumpSp = 0;
+
+                }
+                if (isBig)
+                {
+                    if (map01[(posiY - 2) % 16, posiX] != 0 &amp;&amp; (marioY + 16) % 32 &lt; 16 &amp;&amp; !isFoll)//頭がぶつかったら
+                    {
+                        isFoll = true;
+                        jumpSp = 0 - 6;
+                        jumpLv = 0 - 4;
+                        marioY = posiY * 32;
+                        if (posiY == 9 &amp;&amp; posiX == 9 &amp;&amp; !kinokoFlg &amp;&amp; !iskinokoEnd)
+                        {
+                            iskinokoEnd = true;
+                            kinokoFlg = true;
+                            kinokoX = marioX;
+                            kinokoY = 192;
+                            isKinokoLeft = false;
+                            isGetKinoko = false;
+                            hatenas[0] = true;
+                        }
+                        for (int i = 1; i &lt; 7; i++)
+                        {
+                            if (posiY == (int)(hatenaYs[i] / 32) + 2 &amp;&amp; posiX == (int)(hatenaXs[i] / 32) &amp;&amp; !hatenas[i])
+                            {
+                                hatenas[i] = true;
+                                hatenaCoinDisp[i]++;
+                                score += 100;
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+
+                    if (map01[(posiY - 1) % 16, posiX] != 0 &amp;&amp; (marioY + 16) % 32 &lt; 16 &amp;&amp; !isFoll)//頭がぶつかったら
+                    {
+                        isFoll = true;
+                        jumpSp = 0 - 6;
+                        jumpLv = 0 - 4;
+                        marioY = posiY * 32;
+                        if (posiY == 8 &amp;&amp; posiX == 9 &amp;&amp; !kinokoFlg &amp;&amp; !isBig &amp;&amp; !iskinokoEnd)//キノコ出現ポイント
+                        {
+                            iskinokoEnd = true;
+                            kinokoFlg = true;
+                            kinokoX = marioX;
+                            kinokoY = 192;
+                            isKinokoLeft = false;
+                            isGetKinoko = false;
+                            hatenas[0] = true;
+                        }
+                        for (int i = 1; i &lt; 7; i++)
+                        {
+                            if (posiY == (int)(hatenaYs[i] / 32) + 1 &amp;&amp; posiX == (int)(hatenaXs[i] / 32) &amp;&amp; !hatenas[i])
+                            {
+                                hatenas[i] = true;
+                                hatenaCoinDisp[i]++;
+                                score += 100;
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+            if (posiY &gt;= 14)//落下したら
+            {
+                outLabel.Visible = true;
+                isOut = true;
+            }
+        }
+        private void kinokoMove()//キノコのメソッド
+        {
+            if (isKinokoLeft)
+            {
+                kinokoX -= 2 + goNum;
+            }
+            else
+            {
+                kinokoX += 2 + goNum;
+            }
+
+
+            if (map01[(int)((kinokoY + 16) / 32) + 1, (int)((kinokoX + 16) / 32)] == 0)//床が無くなったら
+            {
+                kinokoY += 9;
+            }
+            else
+            {
+                kinokoY = (int)((kinokoY + 16) / 32) * 32;
+            }
+
+            if (map01[(int)((kinokoY + 16) / 32), (int)((kinokoX + 16) / 32) + 1] != 0)//前方に障害物があったら
+            {
+                if ((kinokoX + 16) % 32 &gt; 16)
+                {
+                    kinokoX = (int)((kinokoX + 16) / 32) * 32;
+                    isKinokoLeft = true;
+                }
+            }
+            if (map01[(int)((kinokoY + 16) / 32), (int)((kinokoX + 16) / 32) - 1] != 0)//左に障害物があったら
+            {
+                if ((kinokoX + 16) % 32 &lt; 16)
+                {
+                    kinokoX = (int)((kinokoX + 16) / 32) * 32;
+                    isKinokoLeft = false;
+                }
+            }
+            if (-20 &lt; (kinokoY - marioY) &amp;&amp; (kinokoY - marioY) &lt; 20 &amp;&amp; -20 &lt; (kinokoX - marioX) &amp;&amp; (kinokoX - marioX) &lt; 20)
+            {
+                isGetKinoko = true;
+                isBig = true;
+                score += 300;
+            }
+            if (kinokoX - goX &lt; 0 - 16)
+            {
+                kinokoFlg = false;
+            }
+        }
+
+        private void kuriboMove(int i)
+        {
+            if (!kuriboRights[i])
+            {
+                kuriboNowXs[i] -= 1 + goNum;
+            }
+            else
+            {
+                kuriboNowXs[i] += 1 + goNum;
+            }
+
+            if (kuriboNowYs[i] &gt; 400)
+            {
+                kuriboDowns[i] = true;
+                return;
+            }
+            else
+            {
+                if (map01[(int)((kuriboNowYs[i] + 16) / 32) + 1, (int)((kuriboNowXs[i] + 16) / 32)] == 0)//床が無くなったら
+                {
+                    kuriboNowYs[i] += 9;
+                }
+                else
+                {
+                    kuriboNowYs[i] = (int)((kuriboNowYs[i] + 16) / 32) * 32;
+                }
+            }
+
+            if (map01[(int)((kuriboNowYs[i] + 16) / 32), (int)((kuriboNowXs[i] + 16) / 32) + 1] != 0)//前方に障害物があったら
+            {
+                if ((kuriboNowXs[i] + 16) % 32 &gt; 16)
+                {
+                    kuriboNowXs[i] = (int)((kuriboNowXs[i] + 16) / 32) * 32;
+                    kuriboRights[i] = false;
+                }
+            }
+            if (map01[(int)((kuriboNowYs[i] + 16) / 32), (int)((kuriboNowXs[i] + 16) / 32) - 1] != 0)//左に障害物があったら
+            {
+                if ((kuriboNowXs[i] + 16) % 32 &lt; 16)
+                {
+                    kuriboNowXs[i] = (int)((kuriboNowXs[i] + 16) / 32) * 32;
+                    kuriboRights[i] = true;
+                }
+            }
+
+            if (15 &lt; (kuriboNowYs[i] - marioY) &amp;&amp; (kuriboNowYs[i] - marioY) &lt; 31 &amp;&amp; -24 &lt; (kuriboNowXs[i] - marioX) &amp;&amp; (kuriboNowXs[i] - marioX) &lt; 24 &amp;&amp; isFoll)
+            {
+                isHunduke = true;
+                marioY -= 10;
+                jumpLv = 6;
+                jumpSp = 9;
+                jumpHi = 10;
+                isFoll = false;
+                kuriboDowns[i] = true;
+                score += 200;
+                kuriboHirs[i] += 1;
+                return;
+            }
+
+
+            if (-20 &lt; (kuriboNowYs[i] - marioY) &amp;&amp; (kuriboNowYs[i] - marioY) &lt; 20 &amp;&amp; -20 &lt; (kuriboNowXs[i] - marioX) &amp;&amp; (kuriboNowXs[i] - marioX) &lt; 20 &amp;&amp; !kuriboDowns[i])
+            {
+                HitDamage();
+            }
+            else if (-52 &lt; (kuriboNowYs[i] - marioY) &amp;&amp; (kuriboNowYs[i] - marioY) &lt; 20 &amp;&amp; -20 &lt; (kuriboNowXs[i] - marioX) &amp;&amp; (kuriboNowXs[i] - marioX) &lt; 20 &amp;&amp; !kuriboDowns[i] &amp;&amp; isBig)
+            {
+                HitDamage();
+            }
+            if (kuriboNowXs[i] - goX &lt; 0 - 16)
+            {
+                kuriboDowns[i] = true;
+            }
+
+        }
+
+
+        private void killerMove(int i)
+        {
+            killerXList[i] -= 4 + (int)(goNum / 2);
+
+
+            if (15 &lt; (killerYList[i] - marioY) &amp;&amp; (killerYList[i] - marioY) &lt; 31 &amp;&amp; -24 &lt; (killerXList[i] - marioX) &amp;&amp; (killerXList[i] - marioX) &lt; 24)
+            {
+                isHunduke = true;
+                marioY -= 10;
+                jumpLv = 6;
+                jumpSp = 9;
+                jumpHi = 10;
+                isFoll = false;
+                killerDownList[i] = true;
+                score += 450;
+                killerCrashList[i] += 1;
+                return;
+            }
+
+
+            if (-20 &lt; (killerYList[i] - marioY) &amp;&amp; (killerYList[i] - marioY) &lt; 20 &amp;&amp; -20 &lt; (killerXList[i] - marioX) &amp;&amp; (killerXList[i] - marioX) &lt; 20 &amp;&amp; !killerDownList[i])
+            {
+                HitDamage();
+            }
+            else if (-52 &lt; (killerYList[i] - marioY) &amp;&amp; (killerYList[i] - marioY) &lt; 20 &amp;&amp; -20 &lt; (killerXList[i] - marioX) &amp;&amp; (killerXList[i] - marioX) &lt; 20 &amp;&amp; !killerDownList[i] &amp;&amp; isBig)
+            {
+                HitDamage();
+            }
+            if (killerXList[i] - goX &lt; 0 - 16)
+            {
+                killerDownList[i] = true;
+            }
+
+        }
+
+        private void ForOut()//アウトになったら
+        {
+            outShadow.Left = 58 + goX;//「アウト～！」表示位置調整
+            outShadow.Visible = true;
+            outLabel.Visible = true;
+            outLoopCount++;
+            if (outLoopCount &gt; 32)
+            {
+                outLoopCount = 0;
+                isOut = false;
+                goX = 0;
+                initGame();
+            }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)//スタート時のステージ生成
+        {
+            for (int i = 0; i &lt; HEIGHT; i++)
+            {
+                for (int j = 0; j &lt; 130; j++)
+                {
+                    if (map01[i, j] == 1)
+                    {
+                        e.Graphics.DrawImage(jimen.Image, j * 32, i * 32, 32, 32);
+                    }
+                    else if (map01[i, j] == 2)
+                    {
+                        e.Graphics.DrawImage(renga.Image, j * 32, i * 32, 32, 32);
+                    }
+                    else if (map01[i, j] == 3)
+                    {
+                        e.Graphics.DrawImage(hatena1.Image, j * 32, i * 32, 32, 32);
+                    }
+                    else if (map01[i, j] == 4)
+                    {
+                        e.Graphics.DrawImage(ishi.Image, j * 32, i * 32, 32, 32);
+                    }
+                    else if (map01[i, j] == 5)
+                    {
+                        GraphicsUnit units = GraphicsUnit.Pixel;
+                        e.Graphics.DrawImage(dokan.Image, j * 32, i * 32, new Rectangle(0, 0, 32, 32), units);
+                    }
+                    else if (map01[i, j] == 6)
+                    {
+                        GraphicsUnit units = GraphicsUnit.Pixel;
+                        e.Graphics.DrawImage(dokan.Image, j * 32, i * 32, new Rectangle(32, 0, 32, 32), units);
+                    }
+                    else if (map01[i, j] == 7)
+                    {
+                        GraphicsUnit units = GraphicsUnit.Pixel;
+                        e.Graphics.DrawImage(dokan.Image, j * 32, i * 32, new Rectangle(0, 32, 32, 32), units);
+                    }
+                    else if (map01[i, j] == 8)
+                    {
+                        GraphicsUnit units = GraphicsUnit.Pixel;
+                        e.Graphics.DrawImage(dokan.Image, j * 32, i * 32, new Rectangle(32, 32, 32, 32), units);
+                    }
+                    else if (map01[i, j] == 9)
+                    {
+                        e.Graphics.DrawImage(hatena2.Image, j * 32, i * 32, 32, 32);
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D)
+            {
+                isRight = true;
+            }
+            if (e.KeyCode == Keys.A)
+            {
+                isLeft = true;
+            }
+            if (e.KeyCode == Keys.L)
+            {
+                humiJumpFlg = true;
+                if (jumpHi == 0 || isHunduke)
+                {
+                    isJump = true;
+                }
+            }
+            if (e.KeyCode == Keys.K)
+            {
+                isDashSub = true;
+                if (jumpHi == 0)
+                {
+                    isDash = true;
+                }
+
+            }
+            if (e.KeyCode == Keys.R)
+            {
+                resetFlg = true;
+            }
+            if (e.KeyCode == Keys.T)
+            {
+                if (pauseFlg)
+                {
+                    pauseFlg = false;
+                }
+                else
+                {
+                    pauseFlg = true;
+                }
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D)
+            {
+                isRight = false;
+            }
+            if (e.KeyCode == Keys.A)
+            {
+                isLeft = false;
+            }
+            if (e.KeyCode == Keys.L)
+            {
+                humiJumpFlg = false;
+                isJump = false;
+            }
+            if (e.KeyCode == Keys.K)
+            {
+                isDashSub = false;
+                isDash = false;
+            }
+        }
+    }
+}
+</code></pre>
+
+</body>
+</html>
