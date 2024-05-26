@@ -1,0 +1,299 @@
+/* css変数を自動適応でなく明示的に使用 */
+:root{
+  --color01-h1:#ff514b;
+  --color02-headerBack: rgba(15, 15, 15, 0.8) 0%,rgba(27, 28, 29, 0.8) 40%, rgba(98,100,102,0.8) 60%, rgba(10, 10, 10, 0.8) 100%;
+  --color03-bodyBack: linear-gradient(135deg, rgba(98,100,102,1) 0%, rgba(6,59,96,1)100%);
+  --color04-navButton:rgb(219, 244, 255);
+  --color05-hamburger:rgb(167, 205, 221);
+  --color06-mainBack:rgba(220, 220, 230, 0.9);
+  --color07-footerBack:rgba(107, 107, 107, 0.7) ;
+  --color08-footerFont:#ccc;
+  --color09-secBlock:rgba(255, 255, 255, 0.9);
+  --color10-none:rgba(255, 255, 255, 0.014);
+  --color11-normal:#000;
+  --color12-maker:rgba(255, 180, 199, 0.7) ;
+
+  --boxShadow01: 0.1em 0.6em 1.3em 0 rgba(0, 0, 0, .5);
+
+  --defaultFontSize:clamp(16px,3vmax,32px);
+  --menuFontSize:clamp(19px,2.5vw,25px);
+  --urlFontSize:clamp(11px,1.3vmax,16px);
+}
+/* 余白をリセット */
+*{
+  margin: 0;
+  padding: 0;
+}
+/* 標準の文字と背景色を設定 */
+body{
+  font-size: var(--defaultFontSize);
+  background: var(--color03-bodyBack);
+  font-family: YuMincho,"Hiragino Mincho ProN",HGS明朝E,メイリオ,Meiryo,serif;
+}
+/* タイトルのフォントをファイルに用意 */
+@font-face {
+    font-family: DiplomataSC;
+    src: url('material/DiplomataSC-Regular.ttf') format('truetype');
+}
+.diplomataSC{
+  font-family: DiplomataSC ;
+}
+/* ヘッダーフッターの設定 */
+#header{
+  top:0;
+  padding: 1em 0 0 0;
+  position: fixed;
+  width: 100%;
+  background-image: -webkit-linear-gradient(315deg, var(--color02-headerBack));
+  background-image: linear-gradient(135deg, var(--color02-headerBack));
+  z-index: 2;
+}
+footer{
+  padding: 0.3em 0 0.7em 0;
+  color: var(--color08-footerFont);
+  background-color: var(--color07-footerBack);
+  font-size: 0.5em;
+  text-align: center;
+}
+a.footer{
+  color: var(--color08-footerFont);
+  text-decoration: none;
+  font-size: 1.3em;
+}
+h1{
+  font-size: 1em;
+  letter-spacing: 0.2em;
+  margin: 0 0 0 0;
+  padding: 0 0.3em 0.2em 1em;
+  font-family: DiplomataSC ;
+}
+h1 a{
+  color:var(--color01-h1);
+  text-decoration: none;
+}
+p#login-dsp2{
+  position: fixed;
+  color: #fff;
+  font-size: 0.5em;
+  height: 0.5em;
+  width: auto;
+  margin: 0;
+  z-index: 5;
+  top:0.15em;
+  right: 1.5em;
+}
+nav.nowrap{
+  white-space:nowrap;
+	overflow-x: auto;
+}
+nav button{
+  margin: 0.3em 0;
+  padding: 0.8em;
+  background-color: transparent;
+  font-family: Meiryo UI ;
+  border-color: rgba(255, 255, 255, 0.562) ;
+  font-weight:bold;
+  font-size: var(--menuFontSize);
+  color: var(--color04-navButton);
+}
+nav button:hover{
+  background-color: rgba(255, 255, 255, 0.562);
+}
+.inlineBlockBw{
+  padding: 0 0.4em;
+  display: flex;
+  justify-content: space-between;
+}
+nav hr{
+  border-top: 0.15em solid var(--color05-hamburger);
+  width: 1.2em;
+  margin: 0.2em 0;
+}
+/* メインのスタイル */
+main.mainDefault{
+  margin: 6.2em 0.3em 0.3em 0.3em;
+  padding: 0.1em 0.1em 1em 0.1em;
+  min-height: 65vh;
+  background-color: var(--color06-mainBack);
+}
+main p{
+  margin: 0.5em;
+}
+/* メインの中のブロックの種類 */
+.privacyPolicy, .home, .login{
+  max-width: 1400px;
+  margin: 1.5em;
+  font-size: 0.8em;
+  padding: 1.2em;
+  background-color: var(--color09-secBlock);
+  border-radius: 2em ;
+  box-shadow: var(--boxShadow01);
+}
+.width{
+  max-width: 1400px;
+  display: flex;
+  justify-content:center;
+  align-items: start;
+  flex-wrap: wrap;
+}
+.works{
+  width: 12.8em;
+  height: 22em;
+  margin: 1.5em;
+  font-size: 0.8em;
+  padding: 1.2em;
+  background-color: var(--color09-secBlock);
+  border-radius: 2em ;
+  box-shadow: var(--boxShadow01);
+  word-break:break-all;
+}
+.works:hover{
+  background-color: #dfdfdf;
+}
+figure {
+	float: left;
+	margin: 1em 0.6em 0.6em 0;
+}
+figure img {
+  width: 4em;
+  height: auto;
+}
+.home h3,.works h3{
+  border-left: solid 1em #68404000;
+  line-height: 0.9em;
+  padding: 0.1em 0 0 0.35em;
+  border-bottom: solid 0.4em #c1ccd3;
+}
+h4{
+  margin: 0.6em;
+}
+.home p,.works p{
+  margin-top: 1em;
+}
+p.url{
+  margin-top: 0.3em;
+  margin-bottom: 1.7em;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 0.8em;
+}
+a.url{
+  line-height:0;
+  font-size: var(--urlFontSize);
+}
+a.url::before{
+  font-size: 2em;
+  line-height:0;
+  content: '＞リンク';
+}
+.login{
+  max-width: 15em;
+  margin: 1.5em auto;
+  
+}
+h2.login{
+  text-align: center;
+}
+.login input{
+  font-size: 1em;
+}
+article.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login button{
+  font-size: 0.9em;
+  font-family: Meiryo UI ;
+  padding: 0.2em 3em;
+}
+.maker{
+  background-color: var(--color12-maker);
+}
+.privacyPolicy h3{
+  font-size: 1.2em;
+  margin: 2em 0 0 0;
+}
+.lang{
+  margin-left: 3em;
+  color: #ff514b;
+}
+/* フェードインのための記述 */
+.fadeIn{
+  color: var(--color10-none);
+  opacity: 0;
+  position: relative;
+  top: 30em;
+  transition: 0.8s;
+}
+.active {
+  opacity: 1;
+  top: 0;
+  color: var(--color11-normal);
+}
+/* ハンバーガーメニューは閉じるとき以外はCSSのみで動作 */
+nav.hamburgerMenu{
+  margin: -1em 0 0 0;
+  padding: 1em 0 0 0;
+  display: block;
+  position: fixed;
+  background-color: #fff;
+  right: -20em;
+  height: 100%;
+  transition: all 0.3s;
+  z-index: 3;
+}
+nav.hamburgerMenu:target{
+  right: 0;
+}
+nav.hamburgerMenu a.menuClose{
+  right: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  content: "";
+  cursor: default;
+  transition: all 0.3s;
+}
+nav.hamburgerMenu:target a.menuClose{
+  right: 11em;
+}
+nav .inner{
+  padding: 1.5em;
+}
+nav .inner p{
+  margin: 0;
+  padding: 0.2em;
+}
+p.close{
+  text-align: right;
+}
+p.close a{
+  padding: 0.2em 0.4em;
+  width: auto;
+  right: 0;
+  color: #fff;
+  border-radius: 50% ;
+  font-size: 1.7em;
+  text-decoration: none;
+  background-color: #666;
+
+}
+p.close a:hover{
+  background-color: #bbb;
+}
+nav .inner p a.menu{
+  display: block;
+  font-size: 1.2em;
+  margin: 0;
+  padding: 0.5em 1.5em;
+  border-bottom: 1px solid #333;
+  text-decoration: none;
+  color: #333;
+  transition-duration: 0.2s;
+}
+nav .inner p a.menu:hover{
+  background-color: #e4e4e4;
+}

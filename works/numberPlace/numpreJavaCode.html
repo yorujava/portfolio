@@ -1,0 +1,1050 @@
+下記Javaの実行で空白数50の問題をランダム作成します。<br>
+<textarea name="" id="numpreJava" cols="37" rows="7" wrap="off" readonly>
+    import java.util.*;
+    import java.lang.*;
+    import java.io.*;
+    
+    // The main method must be in a class named &quot;Main&quot;.
+    class Main {
+        public static void main(String[] args) {
+               int[][][] gameBords = new int[2][9][9];
+                int level = 50;
+                gameBords = makeBord(level);// 問題作成を呼ぶ
+                    disp(gameBords);
+        }
+    
+    
+        public static int[][][] makeBord(int level) {
+    
+            int[][] gameBords = new int[9][9];
+            boolean isRetry = true;
+            int countRetry = 0;
+            // ２進数から自由に情報の読み出しが分からないので
+            // 素数９個の掛け算で数字に情報を持たせる
+            int[] taiou = { 0, 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+            while (isRetry) {// 失敗前提でランダムな数字で問題作成をループする
+                isRetry = false;
+                countRetry++;
+                if (countRetry &gt; 10000) {// １万回まで作成チャレンジ
+                    for (int i = 0; i &lt; 100; i++) {
+                        System.out.println(&quot;問題作成に失敗しました&quot;);
+                    }
+                }
+                for (int i = 0; i &lt; 9; i++) {
+                    for (int j = 0; j &lt; 9; j++) {
+                        gameBords[i][j] = 223092870;// すべてのマスに素数の責を代入
+                    }
+                }
+    
+                Random ran = new Random();
+    
+                for (int x = 0; x &lt; 9; x++) {
+                    for (int y = 0; y &lt; 9; y++) {
+                        boolean isE = true;
+                        int countE = 0;
+                        while (isE) {
+                            int hogehoge = 0;
+                            int hoge = ran.nextInt(9);
+                            for (int z = 0; z &lt; 9; z++) {
+                                if (gameBords[x][y] % taiou[(hoge + z) % 9 + 1] == 0) {// 可能なら
+                                    hogehoge = gameBords[x][y];// 戻せるように、コピーしておく
+                                    gameBords[x][y] = taiou[(hoge + z) % 9 + 1];// 素数を代入
+                                    isE = false;
+                                    break;
+                                } else if (z == 8) {
+                                    isRetry = true;
+                                }
+                            }
+                            // 行・列・枠の数字被りの除去
+                            for (int m = 0; m &lt; 9; m++) {
+                                if (gameBords[m][y] % gameBords[x][y] == 0 &amp;&amp; m != x) {
+                                    gameBords[m][y] /= gameBords[x][y];// 素数で割って除く
+                                }
+                                if (gameBords[x][m] % gameBords[x][y] == 0 &amp;&amp; m != y) {
+                                    gameBords[x][m] /= gameBords[x][y];// 素数で割って除く
+                                }
+                            }
+                            int x2 = ((x / 3) * 3);
+                            int y2 = ((y / 3) * 3);
+                            for (int m = 0; m &lt; 3; m++) {
+                                for (int n = 0; n &lt; 3; n++) {
+                                    if (gameBords[x2 + m][y2 + n] % gameBords[x][y] != 0 || (x2 + m == x &amp;&amp; y2 + n == y)) {
+    
+                                    } else {
+                                        gameBords[x2 + m][y2 + n] /= gameBords[x][y];
+                                    }
+                                }
+                            }
+    
+                            for (int i = 0; i &lt; 9; i++) {
+                                for (int j = 0; j &lt; 9; j++) {// 全マス検索
+                                    if (gameBords[i][j] == 1) {// 作成エラー（素数を持ってない）
+                                        isE = true;
+                                        gameBords[x][y] = hogehoge;// 代入前に戻す
+                                        countE++;
+                                        if (countE &lt; 30) {
+                                            isRetry = true;
+                                        }
+                                    }
+                                }
+                            }
+                            if (isRetry) {
+                                break;
+                            }
+                        } // while
+                    }
+                }
+    
+            }
+            int[][][] doubleBords = new int[2][9][9];
+            for (int i = 0; i &lt; 9; i++) {
+                for (int j = 0; j &lt; 9; j++) {
+                    for (int k = 1; k &lt;= 9; k++) {
+                        if (gameBords[i][j] == taiou[k]) {// 素数を対応した数字に置き換える
+                            doubleBords[0][i][j] = k;// 問題用の表面
+                            doubleBords[1][i][j] = k;// 正誤チェック用の裏面
+                        }
+                    }
+                }
+            }
+            if (level &gt; 81) {// 空白依頼がマス数を超えていたら
+                level = 81;
+            }
+            int syuukaisuu = 800;
+            for (int x = 0; x &lt; syuukaisuu; x++) {// 空白作成のチャレンジ回数
+                for (int i = 0; i &lt; level; i++) {
+                    Random ran = new Random();
+                    int erI = ran.nextInt(9);
+                    int erJ = ran.nextInt(9);
+                    if (doubleBords[0][erI][erJ] == 0) {
+                        i--;// ランダムで選んだマスがすでに空白ならノーカンにする
+                    } else {
+                        doubleBords[0][erI][erJ] = 0;// 0のマスを空白と見なす
+                    }
+    
+                }
+                if (level &gt; 59 &amp;&amp; x &gt; 5) {
+                    x = syuukaisuu - 1;
+                }
+                if (level &gt; 52 &amp;&amp; solveTheProblem(doubleBords, false, true, false) == 81) {
+                    break;// 作成に成功したらループを抜ける
+                } else if (solveTheProblem(doubleBords, false, false, false) == 81) {// ロジカルチェック
+                    break;// 作成に成功したらループを抜ける
+                } else if (x == syuukaisuu - 1) {// チャレンジ内でロジカルチェック合格せず
+                    System.out.println(&quot;この問題はロジカルでない可能性があります&quot;);
+                    break;// 非ロジカルにするとしてループを抜ける
+                }
+                for (int i = 0; i &lt; 9; i++) {
+                    for (int j = 0; j &lt; 9; j++) {// 空白作成、再チャレンジ用に
+                        for (int k = 1; k &lt;= 9; k++) {// 作り直す
+                            if (gameBords[i][j] == taiou[k]) {
+                                doubleBords[0][i][j] = k;
+                                doubleBords[1][i][j] = k;
+                            }
+                        }
+                    }
+                }
+    
+            }
+    
+            return doubleBords;
+    
+        }
+    
+        public static void disp(int[][][] gameBords) {
+            for (int i = 0; i &lt; 9; i++) {
+                if (i % 3 == 0) {
+                    System.out.println(&quot; -----------------------&quot;);
+                }
+                System.out.print(&quot;|&quot;);
+                for (int j = 0; j &lt; 9; j++) {
+                    if (gameBords[0][i][j] == 0) {
+                        System.out.print(&quot; -&quot;);
+                    } else if (gameBords[0][i][j] == 10) {
+                        System.out.print(&quot;&gt;*&quot;);
+                    } else {
+                        System.out.print(&quot; &quot; + gameBords[0][i][j]);
+                    }
+                    if (j % 3 == 2) {
+                        System.out.print(&quot; |&quot;);
+                    }
+                    if (j == 8) {
+                        System.out.println(&quot;&quot;);
+                    }
+                }
+            }
+            System.out.println(&quot; -----------------------&quot;);
+        }
+    
+        public static int check(int basyo, int num, int[][][] gameBords) {
+            // 入力の十の位と一の位を切り分けて多次元で使う
+            int a = gameBords[1][basyo / 10 - 1][basyo % 10 - 1];// 裏面の正解を代入
+            if (a == num) {// 入力と比較して正解チェック
+                gameBords[0][basyo / 10 - 1][basyo % 10 - 1] = a;
+            } else {
+                System.out.println(&quot;違います&quot;);
+            }
+            int count = 0;
+            for (int i = 0; i &lt; 9; i++) {// 全マス検索
+                for (int j = 0; j &lt; 9; j++) {
+                    if (gameBords[0][i][j] == 0) {
+                        count++;// 空白の数をカウント
+                    }
+    
+                }
+            }
+            return count;// 空白数を返す（0なら全て記入済みでクリア）
+        }
+    
+        public static int solveTheProblem(int[][][] gameBords, boolean isSolve, boolean isSafety, boolean isBaku) {
+    
+            // 無駄なコードが多く残っていたりします
+            // ロジックのアルゴリズムの部分ですので読み解くのは困難です
+    
+            int[][] gameBordsB = new int[9][9];
+            int kakuSum = 0;
+            int[] taiou = { 223092870, 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+            int[][] kaku = new int[9][9];// 各マス、未確定の数字の数
+            int[][] kakuD = new int[9][9];
+            int bfSum = 0;// 処理前の未確定数の合計
+            int afSum = 0;// 処理後の未確定数の合計
+    
+            for (int i = 0; i &lt; 9; i++) {// 回答操作用のボードにコピー
+                for (int j = 0; j &lt; 9; j++) {
+                    int numB = gameBords[0][i][j];
+                    gameBordsB[i][j] = taiou[numB];
+                    if (numB == 0) {
+                        kaku[i][j] = 9;
+                        afSum += 9;
+                    } else {
+                        kaku[i][j] = 1;
+                        afSum += 1;
+                    }
+                }
+            } // ここまで回答ボードコピー
+            kakuSum = 0;
+            for (int i = 0; i &lt; 9; i++) {
+                for (int j = 0; j &lt; 9; j++) {
+                    for (int k = 1; k &lt;= 9; k++) {
+                        if (gameBordsB[i][j] == taiou[k]) {
+                            kakuSum++;
+                        }
+                    }
+                }
+            }
+    
+            afSum = kakuSum;
+    
+            while (true) {
+                bfSum = afSum;
+                for (int x = 0; x &lt; 9; x++) {// 全マス
+                    for (int y = 0; y &lt; 9; y++) {// 全マス
+                        boolean isKK = false;
+                        if (kaku[x][y] != 0) {// 処理済みを除外
+                            for (int kk = 1; kk &lt;= 9; kk++) {// マスに候補が一つかどうか
+                                if (gameBordsB[x][y] == taiou[kk]) {
+                                    isKK = true;
+                                    kaku[x][y] = 0;// 処理済みにする
+                                }
+                            }
+                            if (isKK) {// マスに候補が一つなら
+                                jokyoSuru(gameBordsB, x, y);
+                            } // ここまでマス一に対しての除去
+                        } // 処理済み除外
+                    }
+                } // ここまで全マス探索
+    
+                for (int kk = 1; kk &lt;= 9; kk++) {// 行一探索するナンバー
+                    int countH = 0;
+                    int basyo = 0;
+                    for (int x = 0; x &lt; 9; x++) {// 行探索
+                        countH = 0;
+                        for (int y = 0; y &lt; 9; y++) {
+                            if (gameBordsB[y][x] % taiou[kk] == 0) {
+                                countH++;
+                                basyo = y;
+                            }
+                        }
+                        if (countH == 1 &amp;&amp; kaku[basyo][x] != 0) {
+                            kaku[basyo][x] = 0;
+                            gameBordsB[basyo][x] = taiou[kk];
+                            jokyoSuru(gameBordsB, basyo, x);
+                        }
+    
+                    }
+                }
+                for (int kk = 1; kk &lt;= 9; kk++) {// 列一探索するナンバー
+                    int countH = 0;
+                    int basyo = 0;
+                    for (int x = 0; x &lt; 9; x++) {// 列探索
+                        countH = 0;
+                        for (int y = 0; y &lt; 9; y++) {
+                            if (gameBordsB[x][y] % taiou[kk] == 0) {
+                                countH++;
+                                basyo = y;
+                            }
+                        }
+                        if (countH == 1 &amp;&amp; kaku[x][basyo] != 0) {
+                            kaku[x][basyo] = 0;
+                            gameBordsB[x][basyo] = taiou[kk];
+                            jokyoSuru(gameBordsB, x, basyo);
+                        }
+    
+                    }
+                }
+                for (int kk = 1; kk &lt;= 9; kk++) {// 枠一探索するナンバー
+                    int countH = 0;
+                    int x = 0;
+                    int y = 0;
+                    int basyoX = 0;
+                    int basyoY = 0;
+    
+                    for (int xx = 0; xx &lt; 9; xx++) {// 枠探索
+                        countH = 0;
+                        for (int yy = 0; yy &lt; 9; yy++) {
+                            x = (xx / 3) * 3 + yy / 3;
+                            y = (xx % 3) * 3 + yy % 3;
+    
+                            if (gameBordsB[x][y] % taiou[kk] == 0) {
+                                countH++;
+                                basyoX = x;
+                                basyoY = y;
+                            }
+    
+                        }
+                        if (countH == 1 &amp;&amp; kaku[basyoX][basyoY] != 0) {
+                            kaku[basyoX][basyoY] = 0;
+                            gameBordsB[basyoX][basyoY] = taiou[kk];
+                            jokyoSuru(gameBordsB, basyoX, basyoY);
+                        }
+                    }
+                }
+                afSum = 0;// ここで未確定数のカウント
+                for (int i = 0; i &lt; 9; i++) {
+                    for (int j = 0; j &lt; 9; j++) {
+                        if (kaku[i][j] != 0) {
+                            for (int k = 1; k &lt;= 9; k++) {
+                                if (gameBordsB[i][j] % taiou[k] == 0) {
+                                    afSum++;
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                kakuSum = 0;
+                for (int i = 0; i &lt; 9; i++) {
+                    for (int j = 0; j &lt; 9; j++) {
+                        for (int k = 1; k &lt;= 9; k++) {
+                            if (gameBordsB[i][j] == taiou[k]) {
+                                kakuSum++;
+                            }
+                        }
+                    }
+                }
+                afSum = kakuSum;
+                if (kakuSum == 81) {// クリア判定
+                    break;
+    
+                } else if (bfSum != afSum) {
+                    continue;// 順調なら優先処理の繰り返し
+                }
+    
+                for (int kk = 1; kk &lt;= 9; kk++) {// 枠内の行列を探索するナンバー
+                    int countX0 = 0;
+                    int countX1 = 0;
+                    int countX2 = 0;
+                    int countY0 = 0;
+                    int countY1 = 0;
+                    int countY2 = 0;
+                    int x = 0;
+                    int y = 0;
+    
+                    for (int xx = 0; xx &lt; 9; xx++) {// 枠内の行列を探索
+                        countX0 = 0;
+                        countX1 = 0;
+                        countX2 = 0;
+                        countY0 = 0;
+                        countY1 = 0;
+                        countY2 = 0;
+                        for (int yy = 0; yy &lt; 9; yy++) {
+                            x = (xx / 3) * 3 + yy / 3;
+                            y = (xx % 3) * 3 + yy % 3;
+    
+                            if (gameBordsB[x][y] % taiou[kk] == 0) {
+                                if (x % 3 == 0) {
+                                    countX0++;
+                                }
+                                if (x % 3 == 1) {
+                                    countX1++;
+                                }
+                                if (x % 3 == 2) {
+                                    countX2++;
+                                }
+                                if (y % 3 == 0) {
+                                    countY0++;
+                                }
+                                if (y % 3 == 1) {
+                                    countY1++;
+                                }
+                                if (y % 3 == 2) {
+                                    countY2++;
+                                }
+                            }
+    
+                        }
+                        if (countX0 &gt; 1 &amp;&amp; countX1 == 0 &amp;&amp; countX2 == 0) {
+                            lineJokyoSuru(gameBordsB, xx, kk, 0);
+                        }
+                        if (countX0 == 0 &amp;&amp; countX1 &gt; 1 &amp;&amp; countX2 == 0) {
+                            lineJokyoSuru(gameBordsB, xx, kk, 1);
+                        }
+                        if (countX0 == 0 &amp;&amp; countX1 == 0 &amp;&amp; countX2 &gt; 1) {
+                            lineJokyoSuru(gameBordsB, xx, kk, 2);
+                        }
+                        if (countY0 &gt; 1 &amp;&amp; countY1 == 0 &amp;&amp; countY2 == 0) {
+                            lineJokyoSuru(gameBordsB, xx, kk, 3);
+                        }
+                        if (countY0 == 0 &amp;&amp; countY1 &gt; 1 &amp;&amp; countY2 == 0) {
+                            lineJokyoSuru(gameBordsB, xx, kk, 4);
+                        }
+                        if (countY0 == 0 &amp;&amp; countY1 == 0 &amp;&amp; countY2 &gt; 1) {
+                            lineJokyoSuru(gameBordsB, xx, kk, 5);
+                        }
+                    }
+                } // ここまで枠内の行列の探索
+    
+                int bfKouho = 0;
+                int afKouho = 0;
+                kakuSum = 0;
+                for (int i = 0; i &lt; 9; i++) {
+                    for (int j = 0; j &lt; 9; j++) {
+                        for (int k = 1; k &lt;= 9; k++) {
+                            if (gameBordsB[i][j] == taiou[k]) {
+                                kakuSum++;
+                            }
+                            if (gameBordsB[i][j] % taiou[k] == 0) {
+                                bfKouho++;
+                            }
+                        }
+                    }
+                }
+                afSum = kakuSum;
+                if (kakuSum == 81) {// クリア判定
+                    break;
+    
+                } else if (bfSum != afSum) {
+                    continue;// 順調なら優先処理の繰り返し
+                }
+    
+                // ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+                int[] tuwins = { 6, 10, 14, 22, 26, 34, 38, 46, 15, 21, 33, 39, 51, 57, 69, 35, 55, 65, 85, 95, 115, 77,
+                        91, 119, 133, 161, 143, 187, 209, 253, 221, 247, 299, 323, 391, 437 };
+                int[] tuinXs = { 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5, 7, 7, 7, 7, 7, 11, 11,
+                        11, 11, 13, 13, 13, 17, 17, 19 };
+                int[] tuinYs = { 3, 5, 7, 11, 13, 17, 19, 23, 5, 7, 11, 13, 17, 19, 23, 7, 11, 13, 17, 19, 23, 11, 13,
+                        17, 19, 23, 13, 17, 19, 23, 17, 19, 23, 19, 23, 23 };
+                int copyY = 0;
+                int countXs = 0;
+                int countYs = 0;
+                int countXYs = 0;
+                int tx = 0;
+                int ty = 0;
+                // ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+    
+                for (int kk = 0; kk &lt;= 35; kk++) {// 行一探索するナンバー
+                    int countH = 0;
+                    int basyo = 0;
+                    int basyo2 = 0;
+                    for (int x = 0; x &lt; 9; x++) {// 行探索
+                        countH = 0;
+                        for (int y = 0; y &lt; 9; y++) {
+                            if (gameBordsB[y][x] % tuinXs[kk] == 0||gameBordsB[y][x] % tuinYs[kk] == 0) {
+                                countH++;
+                                if (countH == 1) {
+                                    basyo2 = y;
+                                } else {
+                                    basyo = y;
+                                }
+                            }
+                        }
+			if(gameBordsB[basyo][x] !=tuinXs[kk] &&gameBordsB[basyo][x] != tuinYs[kk]&&gameBordsB[basyo2][x] != tuinXs[kk] &&gameBordsB[basyo2][x] != tuinYs[kk]){
+                        if (countH == 2 &amp;&amp; kakuD[basyo][x] != 0 &amp;&amp; kakuD[basyo2][x] != 0) {
+                            kakuD[basyo][x] = 0;
+                            gameBordsB[basyo][x] = tuwins[kk];
+                            kakuD[basyo2][x] = 0;
+                            gameBordsB[basyo2][x] = tuwins[kk];
+                        }
+                        }
+                    }
+                }
+                for (int kk = 0; kk &lt;= 35; kk++) {// 列一探索するナンバー
+                    int countH = 0;
+                    int basyo = 0;
+                    int basyo2 = 0;
+                    for (int x = 0; x &lt; 9; x++) {// 列探索
+                        countH = 0;
+                        for (int y = 0; y &lt; 9; y++) {
+                            if (gameBordsB[x][y] % tuinXs[kk] == 0||gameBordsB[x][y] % tuinYs[kk] == 0) {
+                                countH++;
+                                if (countH == 1) {
+                                    basyo2 = y;
+                                } else {
+                                    basyo = y;
+                                }
+                            }
+                        }
+			if(gameBordsB[x][basyo] !=tuinXs[kk] &&gameBordsB[x][basyo] != tuinYs[kk]&&gameBordsB[x][basyo2] != tuinXs[kk] &&gameBordsB[x][basyo2] != tuinYs[kk]){
+                        if (countH == 2 &amp;&amp; kakuD[x][basyo] != 0 &amp;&amp; kakuD[x][basyo2] != 0) {
+                            kakuD[x][basyo] = 0;
+                            gameBordsB[x][basyo] = tuwins[kk];
+                            kakuD[x][basyo2] = 0;
+                            gameBordsB[x][basyo2] = tuwins[kk];
+                        }
+                        }
+                    }
+                }
+                for (int kk = 0; kk &lt;= 35; kk++) {// 枠一探索するナンバー
+                    int countH = 0;
+                    int x = 0;
+                    int y = 0;
+                    int basyoX = 0;
+                    int basyoY = 0;
+                    int basyoX2 = 0;
+                    int basyoY2 = 0;
+    
+                    for (int xx = 0; xx &lt; 9; xx++) {// 枠探索
+                        countH = 0;
+                        for (int yy = 0; yy &lt; 9; yy++) {
+                            x = (xx / 3) * 3 + yy / 3;
+                            y = (xx % 3) * 3 + yy % 3;
+    
+                            if (gameBordsB[x][y] % tuinXs[kk] == 0||gameBordsB[x][y] % tuinYs[kk] == 0) {
+                                countH++;
+                                if (countH == 1) {
+                                    basyoX2 = x;
+                                    basyoY2 = y;
+                                } else {
+                                    basyoX = x;
+                                    basyoY = y;
+                                }
+                            }
+    
+                        }
+			if(gameBordsB[basyoX][basyoY] !=tuinXs[kk] &&gameBordsB[basyoX][basyoY] != tuinYs[kk]&&gameBordsB[basyoX2][basyoY2] != tuinXs[kk] &&gameBordsB[basyoX2][basyoY2] != tuinYs[kk]){
+                        if (countH == 2 &amp;&amp; kakuD[basyoX][basyoY] != 0 &amp;&amp; kakuD[basyoX2][basyoY2] != 0) {
+                            kakuD[basyoX][basyoY] = 0;
+                            gameBordsB[basyoX][basyoY] = tuwins[kk];
+                            kakuD[basyoX2][basyoY2] = 0;
+                            gameBordsB[basyoX2][basyoY2] = tuwins[kk];
+                        }
+                        }
+                    }
+                }
+    
+                // ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+                for (int k = 0; k &lt; 36; k++) {
+                    for (int x = 0; x &lt; 9; x++) {
+    
+                        countXs = 0;
+                        countYs = 0;
+                        countXYs = 0;
+                        for (int y = 0; y &lt; 9; y++) {
+                            copyY = y;
+    
+                            if (gameBordsB[x][y] == tuwins[k]) {
+                                countXs++;
+                            }
+    
+                            if (gameBordsB[y][x] == tuwins[k]) {
+                                countYs++;
+                            }
+                            tx = (x / 3) * 3 + y / 3;
+                            ty = (x % 3) * 3 + y % 3;
+                            if (gameBordsB[tx][ty] == tuwins[k]) {
+                                countXYs++;
+                            }
+    
+                        }
+                        if (countXs &gt;= 2) {
+                            for (int y = 0; y &lt; 9; y++) {
+                                int xy = gameBordsB[x][y];
+                                if (xy != tuwins[k] &amp;&amp; xy % tuinXs[k] == 0 &amp;&amp; xy != tuinXs[k]) {
+                                    gameBordsB[x][y] /= tuinXs[k];
+                                }
+                                if (xy != tuwins[k] &amp;&amp; xy % tuinYs[k] == 0 &amp;&amp; xy != tuinYs[k]) {
+                                    gameBordsB[x][y] /= tuinYs[k];
+                                }
+                            }
+                        }
+                        if (countYs &gt;= 2) {
+                            for (int y = 0; y &lt; 9; y++) {
+                                int xy = gameBordsB[y][x];
+                                if (xy != tuwins[k] &amp;&amp; xy % tuinXs[k] == 0 &amp;&amp; xy != tuinXs[k]) {
+                                    gameBordsB[y][x] /= tuinXs[k];
+                                }
+                                if (xy != tuwins[k] &amp;&amp; xy % tuinYs[k] == 0 &amp;&amp; xy != tuinYs[k]) {
+                                    gameBordsB[y][x] /= tuinYs[k];
+                                }
+    
+                            }
+    
+                        }
+                        if (countXYs &gt;= 2) {
+                            for (int y = 0; y &lt; 9; y++) {
+                                tx = (x / 3) * 3 + y / 3;
+                                ty = (x % 3) * 3 + y % 3;
+                                int xy = gameBordsB[tx][ty];
+                                if (xy != tuwins[k] &amp;&amp; xy % tuinXs[k] == 0 &amp;&amp; xy != tuinXs[k]) {
+                                    gameBordsB[tx][ty] /= tuinXs[k];
+                                }
+                                if (xy != tuwins[k] &amp;&amp; xy % tuinYs[k] == 0 &amp;&amp; xy != tuinYs[k]) {
+                                    gameBordsB[tx][ty] /= tuinYs[k];
+                                }
+    
+                            }
+    
+                        }
+                    }
+                }
+    
+                // ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+                int st = 0;
+                int[] tuwins2 = { 6, 10, 14, 22, 26, 34, 38, 15, 21, 33, 39, 51, 57, 35, 55, 65, 85, 95, 77, 91, 119,
+                        133, 143, 187, 209, 221, 247, 323 };
+                int[] tuinXs2 = { 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 7, 7, 7, 7, 11, 11, 11, 13, 13,
+                        17 };
+                int[] tuinYs2 = { 3, 5, 7, 11, 13, 17, 19, 5, 7, 11, 13, 17, 19, 7, 11, 13, 17, 19, 11, 13, 17, 19, 13,
+                        17, 19, 17, 19, 19 };
+                int ax = 0;
+                boolean kkXs = false;
+                for (int k = 0; k &lt; 28; k++) {
+                    switch (k) {
+                    case 0:
+                        st = 3;
+                        break;
+                    case 1:
+                        st = 4;
+                        break;
+                    case 2:
+                        st = 5;
+                        break;
+                    case 3:
+                        st = 6;
+                        break;
+                    case 4:
+                        st = 7;
+                        break;
+                    case 5:
+                        st = 8;
+                        break;
+                    case 6:
+                        st = 9;
+                        break;
+                    case 7:
+                        st = 4;
+                        break;
+                    case 8:
+                        st = 5;
+                        break;
+                    case 9:
+                        st = 6;
+                        break;
+                    case 10:
+                        st = 7;
+                        break;
+                    case 11:
+                        st = 8;
+                        break;
+                    case 12:
+                        st = 9;
+                        break;
+                    case 13:
+                        st = 5;
+                        break;
+                    case 14:
+                        st = 6;
+                        break;
+                    case 15:
+                        st = 7;
+                        break;
+                    case 16:
+                        st = 8;
+                        break;
+                    case 17:
+                        st = 9;
+                        break;
+                    case 18:
+                        st = 6;
+                        break;
+                    case 19:
+                        st = 7;
+                        break;
+                    case 20:
+                        st = 8;
+                        break;
+                    case 21:
+                        st = 9;
+                        break;
+                    case 22:
+                        st = 7;
+                        break;
+                    case 23:
+                        st = 8;
+                        break;
+                    case 24:
+                        st = 9;
+                        break;
+                    case 25:
+                        st = 8;
+                        break;
+                    case 26:
+                        st = 9;
+                        break;
+                    case 27:
+                        st = 9;
+                        break;
+                    }
+                    for (int kk = st; kk &lt;= 9; kk++) {
+                        for (int x = 0; x &lt; 9; x++) {
+    
+                            countXs = 0;
+                            countYs = 0;
+                            countXYs = 0;
+                            for (int y = 0; y &lt; 9; y++) {
+                                copyY = y;
+                                ax = gameBordsB[x][y];
+                                kkXs = ax == tuwins2[k] || ax == tuwins2[k] * taiou[kk] || ax == tuinXs2[k] * taiou[kk]
+                                        || ax == tuinYs2[k] * taiou[kk];
+                                if (kkXs) {
+                                    countXs++;
+                                }
+    
+                                ax = gameBordsB[y][x];
+                                kkXs = ax == tuwins2[k] || ax == tuwins2[k] * taiou[kk] || ax == tuinXs2[k] * taiou[kk]
+                                        || ax == tuinYs2[k] * taiou[kk];
+                                if (kkXs) {
+                                    countYs++;
+                                }
+                                tx = (x / 3) * 3 + y / 3;
+                                ty = (x % 3) * 3 + y % 3;
+                                ax = gameBordsB[tx][ty];
+                                kkXs = ax == tuwins2[k] || ax == tuwins2[k] * taiou[kk] || ax == tuinXs2[k] * taiou[kk]
+                                        || ax == tuinYs2[k] * taiou[kk];
+                                if (kkXs) {
+                                    countXYs++;
+                                }
+    
+                            }
+                            if (countXs == 3) {
+                                for (int y = 0; y &lt; 9; y++) {
+                                    int xy = gameBordsB[x][y];
+                                    kkXs = xy != tuwins2[k] &amp;&amp; xy != tuwins2[k] * taiou[kk]
+                                            &amp;&amp; xy != tuinXs2[k] * taiou[kk] &amp;&amp; xy != tuinYs2[k] * taiou[kk];
+                                    if (kkXs &amp;&amp; xy % tuinXs2[k] == 0 &amp;&amp; xy != tuinXs2[k]) {
+                                        gameBordsB[x][y] /= tuinXs2[k];
+                                    }
+                                    if (kkXs &amp;&amp; xy % tuinYs2[k] == 0 &amp;&amp; xy != tuinYs2[k]) {
+                                        gameBordsB[x][y] /= tuinYs2[k];
+                                    }
+                                    if (kkXs &amp;&amp; xy % taiou[kk] == 0 &amp;&amp; xy != taiou[kk]) {
+                                        gameBordsB[x][y] /= taiou[kk];
+                                    }
+                                }
+                            }
+                            if (countYs == 3) {
+                                for (int y = 0; y &lt; 9; y++) {
+                                    int xy = gameBordsB[y][x];
+                                    kkXs = xy != tuwins2[k] &amp;&amp; xy != tuwins2[k] * taiou[kk]
+                                            &amp;&amp; xy != tuinXs2[k] * taiou[kk] &amp;&amp; xy != tuinYs2[k] * taiou[kk];
+                                    if (kkXs &amp;&amp; xy % tuinXs2[k] == 0 &amp;&amp; xy != tuinXs2[k]) {
+                                        gameBordsB[y][x] /= tuinXs2[k];
+                                    }
+                                    if (kkXs &amp;&amp; xy % tuinYs2[k] == 0 &amp;&amp; xy != tuinYs2[k]) {
+                                        gameBordsB[y][x] /= tuinYs2[k];
+                                    }
+                                    if (kkXs &amp;&amp; xy % taiou[kk] == 0 &amp;&amp; xy != taiou[kk]) {
+                                        gameBordsB[y][x] /= taiou[kk];
+                                    }
+    
+                                }
+    
+                            }
+                            if (countXYs == 3) {
+                                for (int y = 0; y &lt; 9; y++) {
+                                    tx = (x / 3) * 3 + y / 3;
+                                    ty = (x % 3) * 3 + y % 3;
+                                    int xy = gameBordsB[tx][ty];
+                                    kkXs = xy != tuwins2[k] &amp;&amp; xy != tuwins2[k] * taiou[kk]
+                                            &amp;&amp; xy != tuinXs2[k] * taiou[kk] &amp;&amp; xy != tuinYs2[k] * taiou[kk];
+                                    if (kkXs &amp;&amp; xy % tuinXs2[k] == 0 &amp;&amp; xy != tuinXs[k]) {
+                                        gameBordsB[tx][ty] /= tuinXs2[k];
+                                    }
+                                    if (kkXs &amp;&amp; xy % tuinYs2[k] == 0 &amp;&amp; xy != tuinYs2[k]) {
+                                        gameBordsB[tx][ty] /= tuinYs2[k];
+                                    }
+                                    if (kkXs &amp;&amp; xy % taiou[kk] == 0 &amp;&amp; xy != taiou[kk]) {
+                                        gameBordsB[tx][ty] /= taiou[kk];
+                                    }
+    
+                                }
+    
+                            }
+                        }
+                    }
+                }
+                // ◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+    
+                kakuSum = 0;
+                for (int i = 0; i &lt; 9; i++) {
+                    for (int j = 0; j &lt; 9; j++) {
+                        for (int k = 1; k &lt;= 9; k++) {
+                            if (gameBordsB[i][j] == taiou[k]) {
+                                kakuSum++;
+                            }
+                        }
+                    }
+                }
+                afSum = kakuSum;
+                if (kakuSum == 81) {// クリア判定
+                    break;
+    
+                } else if (bfSum != afSum) {
+                    continue;// 順調なら優先処理の繰り返し
+                }
+    
+                if (isSafety) {
+                } else {
+    
+                    //●●●●●●●●●●●●●●●●●＜ X-Wing ＞●●
+                    ArrayList&lt;Integer&gt; wXs = new ArrayList&lt;&gt;();
+                    ArrayList&lt;Integer&gt; wYs = new ArrayList&lt;&gt;();
+                    int xy1 = 0;
+                    int xy2 = 0;
+                    int xy3 = 0;
+                    int xy4 = 0;
+                    int yx1 = 0;
+                    int yx2 = 0;
+                    int yx3 = 0;
+                    int yx4 = 0;
+    
+                    for (int k = 1; k &lt;= 9; k++) {
+                        wXs.clear();
+                        wYs.clear();
+                        for (int i = 0; i &lt; 9; i++) {
+                            countXs = 0;
+                            countYs = 0;
+                            for (int j = 0; j &lt; 9; j++) {
+                                if (gameBordsB[i][j] % taiou[k] == 0 &amp;&amp; gameBordsB[i][j] != taiou[k] &amp;&amp; countXs &lt; 3) {
+                                    countXs++;
+                                    if (countXs == 1) {
+                                        xy1 = i * 10 + j;
+                                        wXs.add(xy1);
+                                    } else if (countXs == 2) {
+                                        xy2 = i * 10 + j;
+                                        wXs.add(xy2);
+                                    } else if (countXs == 3) {
+                                        wXs.remove(wXs.indexOf(xy1));
+                                        wXs.remove(wXs.indexOf(xy2));
+                                    }
+                                }
+                                if (gameBordsB[j][i] % taiou[k] == 0 &amp;&amp; gameBordsB[j][i] != taiou[k] &amp;&amp; countYs &lt; 3) {
+                                    countYs++;
+                                    if (countYs == 1) {
+                                        yx1 = j * 10 + i;
+                                        wYs.add(yx1);
+                                    } else if (countYs == 2) {
+                                        yx2 = j * 10 + i;
+                                        wYs.add(yx2);
+                                    } else if (countYs == 3) {
+                                        wYs.remove(wYs.indexOf(yx1));
+                                        wYs.remove(wYs.indexOf(yx2));
+                                    }
+                                }
+                            }
+                        }
+                        for (int i = 0; i &lt; 8; i++) {
+                            for (int j = 0; j &lt; 8; j++) {
+                                xy1 = i * 10 + j;
+                                if (wXs.contains(xy1)) {
+                                    wXs.remove(wXs.indexOf(xy1));
+                                    for (int jz = j + 1; jz &lt; 9; jz++) {
+                                        xy2 = i * 10 + jz;
+                                        if (wXs.contains(xy2)) {
+                                            wXs.remove(wXs.indexOf(xy2));
+                                            for (int iz = i + 1; iz &lt; 9; iz++) {
+                                                xy3 = iz * 10 + j;
+                                                xy4 = iz * 10 + jz;
+                                                if (wXs.contains(xy3) &amp;&amp; wXs.contains(xy4)) {
+                                                    wXs.remove(wXs.indexOf(xy3));
+                                                    wXs.remove(wXs.indexOf(xy4));
+                                                    for (int izz = 0; izz &lt; 9; izz++) {
+                                                        if (izz != i &amp;&amp; izz != iz &amp;&amp; gameBordsB[izz][j] % taiou[k] == 0) {
+                                                            gameBordsB[izz][j] /= taiou[k];
+                                                        }
+                                                        if (izz != i &amp;&amp; izz != iz &amp;&amp; gameBordsB[izz][jz] % taiou[k] == 0) {
+                                                            gameBordsB[izz][jz] /= taiou[k];
+                                                        }
+                                                    }
+                                                }
+                                                //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+                                                
+                                                     
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+    
+                                yx1 = j * 10 + i;
+                                if (wYs.contains(yx1)) {
+                                    wYs.remove(wYs.indexOf(yx1));
+                                    for (int jz = j + 1; jz &lt; 9; jz++) {
+                                        yx2 = jz * 10 + i;
+                                        if (wYs.contains(yx2)) {
+                                            wYs.remove(wYs.indexOf(yx2));
+                                            for (int iz = i + 1; iz &lt; 9; iz++) {
+                                                yx3 = j * 10 + iz;
+                                                yx4 = jz * 10 + iz;
+                                                if (wYs.contains(yx3) &amp;&amp; wYs.contains(yx4)) {
+                                                    wYs.remove(wYs.indexOf(yx3));
+                                                    wYs.remove(wYs.indexOf(yx4));
+                                                    for (int izz = 0; izz &lt; 9; izz++) {
+                                                        if (izz != i &amp;&amp; izz != iz &amp;&amp; gameBordsB[j][izz] % taiou[k] == 0&amp;&amp;gameBordsB[j][izz] != taiou[k]) {
+                                                            gameBordsB[j][izz] /= taiou[k];
+                                                        }
+                                                        if (izz != i &amp;&amp; izz != iz &amp;&amp; gameBordsB[jz][izz] % taiou[k] == 0&amp;&amp; gameBordsB[jz][izz] != taiou[k]) {
+                                                            gameBordsB[jz][izz] /= taiou[k];
+                                                        }
+                                                    }
+                                                }
+                                                //★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+                                                
+                                            } //for i
+                                        } //if yx2
+                                    } //for j
+                                } //if yx1
+    
+                            } //削除の j
+                        } //削除のfor i
+                    } //削除の k
+    
+                    // ●●●●●●●●●●●●●●●●●●●●●●●●●●
+    
+                    kakuSum = 0;
+                    for (int i2 = 0; i2 &lt; 9; i2++) {
+                        for (int j = 0; j &lt; 9; j++) {
+                            for (int k2 = 1; k2 &lt;= 9; k2++) {
+                                if (gameBordsB[i2][j] == taiou[k2]) {
+                                    kakuSum++;
+                                }
+                                if (gameBordsB[i2][j] % taiou[k2] == 0) {
+                                    afKouho++;
+                                }
+                            }
+                        }
+                    }
+                    afSum = kakuSum;
+                    if (kakuSum == 81) {// クリア判定
+                        break;
+    
+                    } else if (bfKouho != afKouho) {
+                        continue;// 順調なら優先処理の繰り返し
+                    } else if (bfSum != afSum) {
+                        continue;// 順調なら優先処理の繰り返し
+                    }
+                }
+                break;
+            }
+            if (isSolve) {
+                if (kakuSum == 81) {
+                    System.out.println(&quot;&quot;);
+                    int[][][] doubleBords = new int[2][9][9];
+                    for (int i = 0; i &lt; 9; i++) {
+                        for (int j = 0; j &lt; 9; j++) {
+                            for (int k = 1; k &lt;= 9; k++) {
+                                if (gameBordsB[i][j] == taiou[k]) {
+                                    doubleBords[0][i][j] = k;
+                                    doubleBords[1][i][j] = k;
+                                }
+                            }
+                        }
+                    }
+    
+                    disp(doubleBords);
+                    System.out.println(&quot;&quot;);
+                    System.out.println(&quot;回答を表示しました&quot;);
+    
+                } else {
+                    
+                }
+            }
+            return kakuSum;
+        }
+    
+        public static void jokyoSuru(int[][] gameBordsB, int x, int y) {
+    
+            // 行・列・枠の数字被りの除去
+            for (int m = 0; m &lt; 9; m++) {// 縦横除去
+                if (gameBordsB[m][y] % gameBordsB[x][y] == 0 &amp;&amp; m != x) {
+                    gameBordsB[m][y] /= gameBordsB[x][y];
+                }
+                if (gameBordsB[x][m] % gameBordsB[x][y] == 0 &amp;&amp; m != y) {
+                    gameBordsB[x][m] /= gameBordsB[x][y];
+                }
+            }
+            int x2 = ((x / 3) * 3);
+            int y2 = ((y / 3) * 3);
+            for (int m = 0; m &lt; 3; m++) {// 枠内除去
+                for (int n = 0; n &lt; 3; n++) {
+                    if (gameBordsB[x2 + m][y2 + n] % gameBordsB[x][y] != 0 || (x2 + m == x &amp;&amp; y2 + n == y)) {
+    
+                    } else {
+                        gameBordsB[x2 + m][y2 + n] /= gameBordsB[x][y];
+                    }
+                }
+            }
+        }
+    
+        public static void lineJokyoSuru(int[][] gameBordsB, int xx, int kk, int typ) {
+    
+            int[] taiou = { 223092870, 2, 3, 5, 7, 11, 13, 17, 19, 23 };
+            if (typ &lt; 3) {
+                for (int i = 3; i &lt; 9; i++) {
+                    if (gameBordsB[((xx / 3) * 3 + typ) % 9][((xx % 3) * 3 + i) % 9] % taiou[kk] == 0
+                            &amp;&amp; gameBordsB[((xx / 3) * 3 + typ) % 9][((xx % 3) * 3 + i) % 9] != taiou[kk]) {
+                        gameBordsB[((xx / 3) * 3 + typ) % 9][((xx % 3) * 3 + i) % 9] /= taiou[kk];
+                    }
+                }
+    
+            } else {
+                typ -= 3;
+                for (int i = 3; i &lt; 9; i++) {
+                    if (gameBordsB[((xx / 3) * 3 + i) % 9][((xx % 3) * 3 + typ) % 9] % taiou[kk] == 0
+                            &amp;&amp; gameBordsB[((xx / 3) * 3 + i) % 9][((xx % 3) * 3 + typ) % 9] != taiou[kk]) {
+                        gameBordsB[((xx / 3) * 3 + i) % 9][((xx % 3) * 3 + typ) % 9] /= taiou[kk];
+                    }
+                }
+    
+            }
+        }
+    
+    }
+</textarea><br>
+
+<button onclick = "copy()">
+コピーする
+</button><br>
+↓リンク先で実行できます。<br>
+<a href="https://www.mycompiler.io/ja/new/java" target="_blank">myCompiler</a><br><br>
+
+外部の問題も解けます。<br>
+↓外部サイト例<br>
+
+<iframe
+  name="inlineFrame"
+  title="Inline Frame"
+  width="276"
+  height="350"
+  src="https://numpre7.com/">
+</iframe>

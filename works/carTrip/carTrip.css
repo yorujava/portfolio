@@ -1,0 +1,106 @@
+#reload{
+    position:relative;
+    top:-10px;
+    left: 82px;
+    height: 24px;
+    font-size: 14px;
+    margin-bottom: -14px;
+}
+#pyLoad{
+    text-align: center;
+}
+.nowLoading{
+    line-height:5em;
+    color: brown;
+}
+article{
+    min-height: 800px;
+}
+.carTripPy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: inline-block;
+    vertical-align:top;
+    width: 360px;
+}
+#mlp{
+    min-height: 345px;
+}
+#ja_map{
+    position:relative;
+    top:-385px;
+    left: 30px;
+    opacity:0.3;
+    height: 274px;
+    width: 299px;
+    margin-bottom: -317px;
+}
+.carNav{
+    font-size: 20px;
+    padding: 8px;
+    margin-bottom: 4px;
+}
+#gameMsg{
+    text-align: center;
+    border: solid 1px;
+    border-color: rgb(105, 105, 105);
+    line-height:4.5em;
+}
+.info{
+    border: solid 1px;
+    border-color: rgb(105, 105, 105);
+    text-align: center;
+    margin-bottom: 2px;
+}
+.gasP{
+    font-size: 23px;
+}
+.rule{
+    border: solid 1px;
+    border-color: rgb(105, 105, 105);
+    padding: 18px 5px;
+    border-radius: 15px ;
+    width: 348px;
+    margin-bottom: 8px;
+}
+ul{
+    padding-left: 10%;
+}
+body{
+    min-width: 460px;
+}
+main{
+    margin-top: 6.2em;
+    padding: 0.1em 0.1em 1em 0.1em;
+    min-height: 65vh;
+    min-width: 450px;
+    background-color: var(--color06-mainBack);
+}
+.home{
+    min-width: 360px;
+}
+#dispNum{
+    font-size: 14px;
+    position:relative;
+    top:-12px;
+    left: 10px;
+    color: rgb(68, 128, 156);
+}
+#goToArea{
+    text-align: center;
+    margin: 12px 0;
+}
+#canvas{
+    min-height: 110px;
+}
+#pyLoad{
+    position:relative;
+    top:-160px;
+}
+#monitor{
+    min-height: 255px;
+}
+#nextReq{
+    line-height:53px;
+}

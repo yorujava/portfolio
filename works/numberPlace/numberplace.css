@@ -1,0 +1,74 @@
+#right{
+    width: 104%;
+    max-width: 280px;
+    font-size: 19px;
+    padding: 6px;
+    background-color: rgb(222, 236, 241);
+    vertical-align:top;
+    margin-top: 1em;
+    position:relative;
+    left: -0.5em;
+}
+#center{
+    width: 0.8em;
+    height: 0.2em;
+}
+#left{
+    width: 14em;
+    vertical-align:top;
+}
+.numpre{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+table.outside{
+    background-color: #4f71ce;
+}
+table.inside{
+    border-collapse:  collapse;
+}
+table.inside th{
+    table-layout:fixed;
+    width: 1.4em;
+    height: 1.4em;
+    border: 2px  #4f71ce solid;
+    background-color: #fff;
+    text-align: center;
+    align-items: center;
+    line-height:0;
+}
+table.inside th:hover{
+    background-color: bisque;
+}
+.iptN{
+    font-size: 1em;
+    padding: 0 0.07em;
+    margin: 0 0.1em;
+    border: 2px  #4f71ce solid;
+    background-color:  #5b7bd4;
+    color: #fff;
+}
+.iptN:hover{
+    background-color: rgb(255, 116, 116);
+    color: darkblue;
+}
+#run,#numpreMsg{
+    text-align: center;
+}
+.numMk{
+    background-color: rgb(255, 116, 116);
+    color: darkblue;
+}
+b.iptN{
+    background-color: rgb(240, 239, 182);
+    color: rgb(228, 0, 0);
+    text-shadow: 2px 1px rgb(129, 129, 77);
+    border: none;
+}
+#reload{
+    margin: 0;
+    font-size: 0.6em;
+    padding: 0.1em 0.5em;
+}
