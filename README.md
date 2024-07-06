@@ -33,7 +33,9 @@ portfolio
 ┃ ┣mario.png  
 ┃ ┣marioS.png  
 ┃ ┣numpre.png  
-┃ ┗thankyou2.mp4  
+┃ ┣shadowforest.jpg  
+┃ ┣thankyou2.mp4  
+┃ ┗tomonashi.jpg  
 ┃  
 ┣ subElement ひな形・プライバシーポリシー  
 ┃ ┣model.html  
@@ -55,6 +57,8 @@ portfolio
 ┃ ┃ ┣carTrip.html  
 ┃ ┃ ┣carTrip.js  
 ┃ ┃ ┗carTrip.py  
+┃ ┣shadowforest SHADOW FOREST  
+┃ ┃ ┗shadowforest.html  
 ┃ ┗index.html 作品リスト画面  
 ┃  
 ┣ README.md この文章  
@@ -68,10 +72,10 @@ portfolio
 
 HTML CSS 独学 20 年  
 Live2D 独学  
-JavaScript 独学 1 ヵ月半(車旅！制作時点)  
-PyScript 独学 2 週間(車旅！制作時点)  
+JavaScript 独学  
+PyScript 独学  
 Java スクール  
 サーブレット JSP MySQL スクール  
 Python スクール  
-C# スクール (習得中)  
-Unity スクール (次に習得)
+C# スクール  
+Unity スクール
